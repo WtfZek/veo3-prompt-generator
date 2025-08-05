@@ -568,12 +568,12 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <section className="py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <Button variant="ghost" asChild className="mb-8">
+            {/* <Button variant="ghost" asChild className="mb-8">
               <Link href="/blog">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Blog
               </Link>
-            </Button>
+            </Button> */}
 
             <article>
               <header className="mb-8">

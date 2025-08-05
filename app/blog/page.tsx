@@ -1,8 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CalendarDays, User, Clock } from "lucide-react"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 const blogPosts = [
   {
@@ -63,16 +67,22 @@ const blogPosts = [
 ]
 
 export default function BlogPage() {
+  const currentLocale = useLocale()
+
   return (
     <main>
       <section className="py-16 bg-gradient-to-br from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            VeO3 <span className="text-primary">Blog</span>
+            {getTranslation(currentLocale, 'blogTitle')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Insights, tutorials, and best practices for AI video generation, prompt engineering, and content creation.
+            {getTranslation(currentLocale, 'blogDescription')}
           </p>
+          {/* 显示当前语言状态，用于测试 */}
+          <div className="mt-4 text-sm text-muted-foreground">
+            {getTranslation(currentLocale, 'currentLanguage')}: {currentLocale}
+          </div>
         </div>
       </section>
 
@@ -105,13 +115,17 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <CardTitle className="mb-3 group-hover:text-primary transition-colors">
-                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    {/* <Link href={`/blog/${post.id}`}>{post.title}</Link> */}
+                    {post.title}
                   </CardTitle>
                   <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center justify-between">
-                    <Link href={`/blog/${post.id}`} className="text-primary hover:underline font-medium">
-                      Read More
-                    </Link>
+                    {/* <Link href={`/blog/${post.id}`} className="text-primary hover:underline font-medium">
+                      {getTranslation(currentLocale, 'readMore')}
+                    </Link> */}
+                    <span className="text-muted-foreground">
+                      {getTranslation(currentLocale, 'readMore')}
+                    </span>
                     <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
                       {post.readTime}

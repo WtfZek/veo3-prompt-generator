@@ -14,15 +14,21 @@ export function LanguageSelector({ currentLocale }: LanguageSelectorProps) {
   const pathname = usePathname()
 
   const switchLanguage = (locale: Locale) => {
-    if (locale === "en") {
-      // Remove /fr prefix for English
-      const newPath = pathname.replace(/^\/fr/, "") || "/"
-      router.push(newPath)
-    } else {
-      // Add /fr prefix for French
-      const newPath = pathname.startsWith("/fr") ? pathname : `/fr${pathname}`
-      router.push(newPath)
+    let newPath = pathname
+    
+    // Remove existing language prefix
+    if (pathname.startsWith('/fr')) {
+      newPath = pathname.replace(/^\/fr/, '') || '/'
+    } else if (pathname.startsWith('/zh')) {
+      newPath = pathname.replace(/^\/zh/, '') || '/'
     }
+    
+    // Add new language prefix (except for English)
+    if (locale !== 'en') {
+      newPath = `/${locale}${newPath}`
+    }
+    
+    router.push(newPath)
   }
 
   return (
@@ -39,6 +45,9 @@ export function LanguageSelector({ currentLocale }: LanguageSelectorProps) {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => switchLanguage("fr")} className={currentLocale === "fr" ? "bg-accent" : ""}>
           🇫🇷 Français
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => switchLanguage("zh")} className={currentLocale === "zh" ? "bg-accent" : ""}>
+          🇨🇳 简体中文
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

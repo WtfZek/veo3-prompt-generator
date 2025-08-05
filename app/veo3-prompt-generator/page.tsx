@@ -14,8 +14,11 @@ import { MessageSquare, Camera, FileText, Type, Info, Video, Loader2, Brain, Cop
 import { ToolNavigation } from "@/components/tool-navigation"
 import { ToastNotification } from "@/components/ui/toast-notification"
 import { useToastNotification } from "@/hooks/use-toast-notification"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export default function Veo3PromptGeneratorPage() {
+  const currentLocale = useLocale()
   const [activeMode, setActiveMode] = useState("chat")
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedPrompts, setGeneratedPrompts] = useState<{
@@ -56,10 +59,10 @@ export default function Veo3PromptGeneratorPage() {
   // Teaser prompts state
   const [currentTeaserIndex, setCurrentTeaserIndex] = useState(0)
   const teaserPrompts = [
-    "We're pulling magic from the cloud…",
-    "Consulting the prompt oracle…",
-    "Cooking something magical",
-    "Creating something you love just a sec. please"
+    getTranslation(currentLocale, 'pullingMagic'),
+    getTranslation(currentLocale, 'consultingOracle'),
+    getTranslation(currentLocale, 'cookingMagical'),
+    getTranslation(currentLocale, 'creatingLove')
   ]
 
   // Cycle through teaser prompts when generating
@@ -68,7 +71,7 @@ export default function Veo3PromptGeneratorPage() {
       const interval = setInterval(() => {
         setCurrentTeaserIndex((prev) => (prev + 1) % teaserPrompts.length)
       }, 3000) // Change every 3 seconds
-      
+
       return () => clearInterval(interval)
     }
   }, [isGenerating, teaserPrompts.length])
@@ -76,8 +79,8 @@ export default function Veo3PromptGeneratorPage() {
   const generateChatPrompt = async () => {
     if (!chatInput.trim()) {
       toast({
-        title: "Missing Input",
-        description: "Please describe your video idea.",
+        title: getTranslation(currentLocale, 'missingInput'),
+        description: getTranslation(currentLocale, 'missingInputDesc'),
         variant: "destructive",
       })
       return
@@ -86,8 +89,8 @@ export default function Veo3PromptGeneratorPage() {
     // Check if at least one output type is selected
     if (!outputOptions.jsonPrompt && !outputOptions.paragraphPrompt) {
       toast({
-        title: "No Output Selected",
-        description: "Please select at least one output format (JSON or Paragraph).",
+        title: getTranslation(currentLocale, 'noOutputSelected'),
+        description: getTranslation(currentLocale, 'noOutputSelectedDesc'),
         variant: "destructive",
       })
       return
@@ -109,7 +112,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             input: chatInput,
             dialogueSetting: outputOptions.dialogue
           }),
@@ -131,11 +134,11 @@ export default function Veo3PromptGeneratorPage() {
       if (outputOptions.paragraphPrompt) {
         console.log("Generating paragraph prompt...")
         const paragraphResponse = await fetch("/api/simple-veo3-prompt/paragraph", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          body: JSON.stringify({ 
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             input: chatInput,
             dialogueSetting: outputOptions.dialogue
           }),
@@ -172,17 +175,17 @@ export default function Veo3PromptGeneratorPage() {
       if (outputOptions.paragraphPrompt) outputTypes.push("Paragraph")
 
       toast({
-        title: "AI Prompt Generated!",
-        description: `${outputTypes.join(" & ")} format${outputTypes.length > 1 ? 's' : ''} ready.`,
+        title: getTranslation(currentLocale, 'aiPromptGenerated'),
+        description: `${outputTypes.join(" & ")} ${getTranslation(currentLocale, outputTypes.length > 1 ? 'formatsReady' : 'formatReady')}`,
       })
-      
+
       // Show bookmark toast notification
       showToastAfterSuccess()
     } catch (error) {
       console.error("Error generating prompt:", error)
       toast({
-        title: "Generation failed",
-        description: error instanceof Error ? error.message : "Failed to generate prompt. Please try again.",
+        title: getTranslation(currentLocale, 'generationFailed'),
+        description: error instanceof Error ? error.message : getTranslation(currentLocale, 'generationFailedDesc'),
         variant: "destructive",
       })
     } finally {
@@ -193,8 +196,8 @@ export default function Veo3PromptGeneratorPage() {
   const generateAdvancedPrompt = async () => {
     if (!advancedData.mainSubject.trim() || !advancedData.sceneAction.trim()) {
       toast({
-        title: "Missing Required Fields",
-        description: "Please fill in the main subject and scene action fields.",
+        title: getTranslation(currentLocale, 'missingRequiredFields'),
+        description: getTranslation(currentLocale, 'missingRequiredFieldsDesc'),
         variant: "destructive",
       })
       return
@@ -203,8 +206,8 @@ export default function Veo3PromptGeneratorPage() {
     // Check if at least one output type is selected
     if (!outputOptions.jsonPrompt && !outputOptions.paragraphPrompt) {
       toast({
-        title: "No Output Selected",
-        description: "Please select at least one output format (JSON or Paragraph).",
+        title: getTranslation(currentLocale, 'noOutputSelected'),
+        description: getTranslation(currentLocale, 'noOutputSelectedDesc'),
         variant: "destructive",
       })
       return
@@ -226,7 +229,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             formData: advancedData,
             dialogueSetting: outputOptions.dialogue
           }),
@@ -248,11 +251,11 @@ export default function Veo3PromptGeneratorPage() {
       if (outputOptions.paragraphPrompt) {
         console.log("Generating Advanced paragraph prompt...")
         const paragraphResponse = await fetch("/api/advanced-veo3-prompt/paragraph", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-          body: JSON.stringify({ 
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             formData: advancedData,
             dialogueSetting: outputOptions.dialogue
           }),
@@ -289,17 +292,17 @@ export default function Veo3PromptGeneratorPage() {
       if (outputOptions.paragraphPrompt) outputTypes.push("Paragraph")
 
       toast({
-        title: "Advanced AI Prompt Generated!",
-        description: `${outputTypes.join(" & ")} format${outputTypes.length > 1 ? 's' : ''} ready.`,
+        title: getTranslation(currentLocale, 'advancedAiPromptGenerated'),
+        description: `${outputTypes.join(" & ")} ${getTranslation(currentLocale, outputTypes.length > 1 ? 'formatsReady' : 'formatReady')}`,
       })
-      
+
       // Show bookmark toast notification
       showToastAfterSuccess()
     } catch (error) {
       console.error("Error generating advanced prompt:", error)
       toast({
-        title: "Generation failed",
-        description: error instanceof Error ? error.message : "Failed to generate advanced prompt. Please try again.",
+        title: getTranslation(currentLocale, 'generationFailed'),
+        description: error instanceof Error ? error.message : getTranslation(currentLocale, 'generationFailedDesc'),
         variant: "destructive",
       })
     } finally {
@@ -334,42 +337,42 @@ export default function Veo3PromptGeneratorPage() {
 
   const faqs = [
     {
-      question: "What is Veo3 and how does this generator help?",
-      answer: "Veo3 is Google's advanced AI video generation model. Our prompt generator creates detailed, structured prompts that help Veo3 understand exactly what video you want to create, including scene details, camera movements, lighting, and audio elements."
+      question: getTranslation(currentLocale, 'faqVeo3Question'),
+      answer: getTranslation(currentLocale, 'faqVeo3Answer')
     },
     {
-      question: "What's the difference between JSON and paragraph formats?",
-      answer: "JSON format provides structured data for technical AI processing and API integrations, while paragraph format offers narrative descriptions for creative AI processing. Both formats contain the same information but are optimized for different use cases."
+      question: getTranslation(currentLocale, 'faqPromptFormatsQuestion'),
+      answer: getTranslation(currentLocale, 'faqPromptFormatsAnswer')
     },
     {
-      question: "Can I use the generated prompts commercially?",
-      answer: "Absolutely! All generated prompts are yours to use for any purpose, including commercial projects, client work, and personal content creation. The prompts are designed to work with Google's Veo3 and other AI video generation tools."
+      question: getTranslation(currentLocale, 'faqPromptCommercialQuestion'),
+      answer: getTranslation(currentLocale, 'faqPromptCommercialAnswer')
     },
     {
-      question: "How accurate are the generated prompts?",
-      answer: "Our AI models achieve 99.5% accuracy in prompt generation, with continuous improvements through machine learning and user feedback. The prompts are specifically optimized for Veo3's capabilities and requirements."
+      question: getTranslation(currentLocale, 'faqPromptAccuracyQuestion'),
+      answer: getTranslation(currentLocale, 'faqPromptAccuracyAnswer')
     },
     {
-      question: "What video formats does Veo3 support?",
-      answer: "Veo3 can generate videos up to 2 minutes long in 4K resolution. Our prompts are optimized for 15-60 second clips with professional cinematic quality, perfect for social media and marketing content."
+      question: getTranslation(currentLocale, 'faqVideoFormatsQuestion'),
+      answer: getTranslation(currentLocale, 'faqVideoFormatsAnswer')
     },
     {
-      question: "Do I need technical knowledge to use this tool?",
-      answer: "No technical knowledge required! Our tool provides both structured (form-based) and advanced (chat-based) modes. Simply describe your video idea in natural language, and our AI will create professional prompts for you."
+      question: getTranslation(currentLocale, 'faqTechnicalQuestion'),
+      answer: getTranslation(currentLocale, 'faqTechnicalAnswer')
     }
   ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-black dark:from-black dark:from-black">
-      <div className="max-w-[720px] mx-auto px-2 xs:px-3 sm:px-4 pt-6 xs:pt-8 sm:pt-10">
+      <div className="max-w-[720px] mx-auto px-2 xs:px-3 sm:px-4 pt-6 xs:pt-8 sm:pt-10 pb-8">
         {/* Headline with Accent Color */}
         <h1 className="text-center text-3xl xs:text-4xl sm:text-5xl lg:text-5xl font-bold mb-2 xs:mb-3 px-1">
-          Veo3 Prompt Generator <span className="text-purple-600">Free Online</span>
+          {getTranslation(currentLocale, 'mainHeading')} <span className="text-purple-600">{getTranslation(currentLocale, 'freeOnline')}</span>
         </h1>
 
         {/* Description */}
         <p className="text-gray-700 dark:text-gray-300 text-center mb-4 xs:mb-6 max-w-2xl mx-auto text-sm xs:text-base px-2">
-          Create detailed, production-ready prompts for Google's Veo3 AI video generation. Perfect for content creators, marketers, and video producers.
+          {getTranslation(currentLocale, 'footerDescription')}
         </p>
 
         {/* Navigation Tabs */}
@@ -382,29 +385,27 @@ export default function Veo3PromptGeneratorPage() {
             <div className="flex items-center justify-center mb-6 gap-3">
               <button
                 onClick={() => setActiveMode("chat")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                  activeMode === "chat" 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${activeMode === "chat"
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
               >
                 <div className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" />
-                  Chat Mode
+                  {getTranslation(currentLocale, 'chatMode')}
                 </div>
               </button>
-              
+
               <button
                 onClick={() => setActiveMode("advanced")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                  activeMode === "advanced" 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${activeMode === "advanced"
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
               >
                 <div className="flex items-center gap-2">
                   <Settings className="h-4 w-4" />
-                  Advanced Mode
+                  {getTranslation(currentLocale, 'structuredMode')}
                 </div>
               </button>
             </div>
@@ -414,8 +415,7 @@ export default function Veo3PromptGeneratorPage() {
               <div className="space-y-4 xs:space-y-6">
                 <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
                   <p className="text-sm xs:text-base text-blue-800 dark:text-blue-200">
-                    Please describe your idea clearly, specify the required video dimensions, and accurately define your target audience. 
-                    Example: An astronaut embarking on an exploratory mission to the moon, vertical video for TikTok targeting space and celestial body enthusiasts
+                    {getTranslation(currentLocale, 'chatPrompt')}
                   </p>
                 </div>
 
@@ -423,7 +423,7 @@ export default function Veo3PromptGeneratorPage() {
                   <Textarea
                     value={chatInput}
                     onChange={(e) => setChatInput(e.target.value)}
-                    placeholder="Describe the video you want to create..."
+                    placeholder={getTranslation(currentLocale, 'chatPlaceholder')}
                     className="min-h-[120px] xs:min-h-[150px] sm:min-h-[200px] resize-none text-sm xs:text-base"
                     maxLength={1000}
                   />
@@ -440,17 +440,17 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Main Subject - Required */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-bold text-red-600">
-                    Main Subject: *Required
+                    {getTranslation(currentLocale, 'mainSubject')}: *{getTranslation(currentLocale, 'required')}
                   </label>
                   <Input
                     value={advancedData.mainSubject}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, mainSubject: e.target.value }))}
-                    placeholder="Describe the main subject's appearance, clothing, characteristics..."
+                    placeholder={getTranslation(currentLocale, 'mainSubjectPlaceholder')}
                     className="border-red-200 focus:border-red-500 text-sm xs:text-base"
                   />
                   {!advancedData.mainSubject.trim() && (
                     <div className="text-xs text-red-600 bg-red-50 px-2 py-1 rounded">
-                      This field is required
+                      {getTranslation(currentLocale, 'mainSubjectRequired')}
                     </div>
                   )}
                 </div>
@@ -458,17 +458,17 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Scene Action - Required */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-bold text-red-600">
-                    Scene Action: *Required
+                    {getTranslation(currentLocale, 'sceneAction')}: *{getTranslation(currentLocale, 'required')}
                   </label>
                   <Input
                     value={advancedData.sceneAction}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, sceneAction: e.target.value }))}
-                    placeholder="What is the subject doing or feeling in the scene?"
+                    placeholder={getTranslation(currentLocale, 'sceneActionPlaceholder')}
                     className="border-red-200 focus:border-red-500 text-sm xs:text-base"
                   />
                   {!advancedData.sceneAction.trim() && (
                     <div className="text-xs text-red-600 bg-red-50 px-2 py-1 rounded">
-                      This field is required
+                      {getTranslation(currentLocale, 'sceneActionRequired')}
                     </div>
                   )}
                 </div>
@@ -476,12 +476,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Target Audience */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Target Audience
+                    {getTranslation(currentLocale, 'targetAudience')}
                   </label>
                   <Input
                     value={advancedData.targetAudience}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, targetAudience: e.target.value }))}
-                    placeholder="e.g., Young adults, Children, Business professionals..."
+                    placeholder={getTranslation(currentLocale, 'targetAudiencePlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -489,31 +489,31 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Video Style */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Video Style
+                    {getTranslation(currentLocale, 'videoStyle')}
                   </label>
                   <select
                     value={advancedData.videoStyle}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, videoStyle: e.target.value }))}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm xs:text-base bg-white dark:bg-gray-800 dark:border-gray-600"
                   >
-                    <option value="Cinematic">Cinematic</option>
-                    <option value="Documentary">Documentary</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="Educational">Educational</option>
-                    <option value="Artistic">Artistic</option>
-                    <option value="Minimalist">Minimalist</option>
+                    <option value="Cinematic">{getTranslation(currentLocale, 'cinematic')}</option>
+                    <option value="Documentary">{getTranslation(currentLocale, 'documentary')}</option>
+                    <option value="Commercial">{getTranslation(currentLocale, 'commercial')}</option>
+                    <option value="Educational">{getTranslation(currentLocale, 'educationalStyle')}</option>
+                    <option value="Artistic">{getTranslation(currentLocale, 'artistic')}</option>
+                    <option value="Minimalist">{getTranslation(currentLocale, 'minimalist')}</option>
                   </select>
                 </div>
 
                 {/* Camera Movement */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Camera Movement
+                    {getTranslation(currentLocale, 'cameraMoving')}
                   </label>
                   <Input
                     value={advancedData.cameraMovement}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, cameraMovement: e.target.value }))}
-                    placeholder="Slow zoom, aerial view, close-up, tracking shot, etc..."
+                    placeholder={getTranslation(currentLocale, 'cameraMovingPlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -521,12 +521,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Lighting Style */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Lighting Style
+                    {getTranslation(currentLocale, 'lightingStyle')}
                   </label>
                   <Input
                     value={advancedData.lightingStyle}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, lightingStyle: e.target.value }))}
-                    placeholder="Natural, dramatic, soft, harsh, colored lighting..."
+                    placeholder={getTranslation(currentLocale, 'lightingStylePlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -534,12 +534,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Color Palette */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Color Palette
+                    {getTranslation(currentLocale, 'colorPalette')}
                   </label>
                   <Input
                     value={advancedData.colorPalette}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, colorPalette: e.target.value }))}
-                    placeholder="Warm, cool, monochrome, vibrant, muted colors..."
+                    placeholder={getTranslation(currentLocale, 'colorPalettePlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -547,12 +547,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Audio Elements */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Audio Elements
+                    {getTranslation(currentLocale, 'audioElements')}
                   </label>
                   <Input
                     value={advancedData.audioElements}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, audioElements: e.target.value }))}
-                    placeholder="Background music, sound effects, ambient sounds..."
+                    placeholder={getTranslation(currentLocale, 'audioElementsPlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -560,12 +560,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Special Effects */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Special Effects
+                    {getTranslation(currentLocale, 'specialEffects')}
                   </label>
                   <Input
                     value={advancedData.specialEffects}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, specialEffects: e.target.value }))}
-                    placeholder="VFX, transitions, filters, overlays..."
+                    placeholder={getTranslation(currentLocale, 'specialEffectsPlaceholder')}
                     className="text-sm xs:text-base"
                   />
                 </div>
@@ -573,12 +573,12 @@ export default function Veo3PromptGeneratorPage() {
                 {/* Additional Details */}
                 <div className="space-y-2">
                   <label className="text-sm xs:text-base font-medium">
-                    Additional Details
+                    {getTranslation(currentLocale, 'additionalDetails')}
                   </label>
                   <Textarea
                     value={advancedData.otherDetails}
                     onChange={(e) => setAdvancedData((prev) => ({ ...prev, otherDetails: e.target.value }))}
-                    placeholder="Any other specific details, mood, atmosphere, or technical requirements..."
+                    placeholder={getTranslation(currentLocale, 'additionalDetailsPlaceholder')}
                     className="min-h-[100px] resize-none text-sm xs:text-base"
                     maxLength={500}
                   />
@@ -592,93 +592,93 @@ export default function Veo3PromptGeneratorPage() {
             {/* Output Options */}
             <div className="mt-6 space-y-2">
               <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                <h3 className="font-semibold text-sm xs:text-base mb-2">Output Options</h3>
-                
+                <h3 className="font-semibold text-sm xs:text-base mb-2">{getTranslation(currentLocale, 'outputOptions')}</h3>
+
                 {/* Prompt Type Options - Parallel on desktop, stacked on mobile */}
                 <div className="flex space-x-4">
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       id="paragraph-prompt"
                       checked={outputOptions.paragraphPrompt}
-                      onCheckedChange={(checked) => 
+                      onCheckedChange={(checked) =>
                         setOutputOptions(prev => ({ ...prev, paragraphPrompt: checked as boolean }))
                       }
                     />
-                    <Label htmlFor="paragraph-prompt" className="text-sm">Paragraph Prompt</Label>
+                    <Label htmlFor="paragraph-prompt" className="text-sm">{getTranslation(currentLocale, 'paragraphPrompt')}</Label>
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       id="json-prompt"
                       checked={outputOptions.jsonPrompt}
-                      onCheckedChange={(checked) => 
+                      onCheckedChange={(checked) =>
                         setOutputOptions(prev => ({ ...prev, jsonPrompt: checked as boolean }))
                       }
                     />
-                    <Label htmlFor="json-prompt" className="text-sm">JSON Prompt</Label>
+                    <Label htmlFor="json-prompt" className="text-sm">{getTranslation(currentLocale, 'jsonPrompt')}</Label>
                   </div>
                 </div>
 
                 {/* Dialogue Options */}
                 <div className="mt-4">
-                  <Label className="font-semibold text-sm xs:text-base">Dialogue Settings</Label>
+                  <Label className="font-semibold text-sm xs:text-base">{getTranslation(currentLocale, 'dialogueSettings')}</Label>
                   <div className="flex space-x-4 mt-1">
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="dialogue-yes"
                         checked={outputOptions.dialogue === "yes"}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           setOutputOptions(prev => ({ ...prev, dialogue: checked ? "yes" : "no" }))
                         }
                       />
-                      <Label htmlFor="dialogue-yes" className="text-sm">Has Dialogue</Label>
+                      <Label htmlFor="dialogue-yes" className="text-sm">{getTranslation(currentLocale, 'hasDialogue')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="dialogue-ai"
                         checked={outputOptions.dialogue === "ai"}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           setOutputOptions(prev => ({ ...prev, dialogue: checked ? "ai" : "no" }))
                         }
                       />
-                      <Label htmlFor="dialogue-ai" className="text-sm">Auto Generate</Label>
+                      <Label htmlFor="dialogue-ai" className="text-sm">{getTranslation(currentLocale, 'autoGenerate')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="dialogue-no"
                         checked={outputOptions.dialogue === "no"}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           setOutputOptions(prev => ({ ...prev, dialogue: checked ? "no" : "yes" }))
                         }
                       />
-                      <Label htmlFor="dialogue-no" className="text-sm">No Dialogue</Label>
+                      <Label htmlFor="dialogue-no" className="text-sm">{getTranslation(currentLocale, 'noDialogue')}</Label>
                     </div>
                   </div>
                 </div>
 
                 {/* Subtitles Option */}
                 <div className="mt-4">
-                  <Label className="font-semibold text-sm xs:text-base">Subtitles</Label>
+                  <Label className="font-semibold text-sm xs:text-base">{getTranslation(currentLocale, 'videoSubtitles')}</Label>
                   <div className="flex space-x-4 mt-1">
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="subtitles-no"
                         checked={outputOptions.subtitles === "no"}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           setOutputOptions(prev => ({ ...prev, subtitles: checked ? "no" : "yes" }))
                         }
                       />
-                      <Label htmlFor="subtitles-no" className="text-sm">No Subtitles</Label>
+                      <Label htmlFor="subtitles-no" className="text-sm">{getTranslation(currentLocale, 'noSubtitles')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         id="subtitles-yes"
                         checked={outputOptions.subtitles === "yes"}
-                        onCheckedChange={(checked) => 
+                        onCheckedChange={(checked) =>
                           setOutputOptions(prev => ({ ...prev, subtitles: checked ? "yes" : "no" }))
                         }
                       />
-                      <Label htmlFor="subtitles-yes" className="text-sm">Include Subtitles</Label>
+                      <Label htmlFor="subtitles-yes" className="text-sm">{getTranslation(currentLocale, 'includeSubtitles')}</Label>
                     </div>
                   </div>
                 </div>
@@ -723,7 +723,7 @@ export default function Veo3PromptGeneratorPage() {
                 <div className="px-2.5">
                   <div className="loader"></div>
                 </div>
-                
+
                 {/* Mini Teaser Prompts */}
                 <div className="text-center">
                   <p className="text-sm text-purple-600 dark:text-purple-400 font-medium animate-pulse">
@@ -738,13 +738,13 @@ export default function Veo3PromptGeneratorPage() {
               <div className="mt-6 space-y-4">
                 {/* JSON Format */}
                 {outputOptions.jsonPrompt && generatedPrompts.jsonPrompt && (
-                <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <FileText className="h-4 w-4 text-gray-600" />
-                    <h4 className="font-bold text-sm flex items-center gap-2">
-                      JSON Format (Technical)
-                    </h4>
+                        <h4 className="font-bold text-sm flex items-center gap-2">
+                          JSON Format (Technical)
+                        </h4>
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -756,43 +756,43 @@ export default function Veo3PromptGeneratorPage() {
                           </Tooltip>
                         </TooltipProvider>
                       </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={async () => {
-                        await navigator.clipboard.writeText(generatedPrompts.jsonPrompt)
-                        toast({
-                          title: "Copied!",
-                          description: "JSON format copied to clipboard",
-                        })
-                        // Show toast notification after copying
-                        showToastAfterSuccess()
-                      }}
-                      className="text-xs h-8 px-3"
-                    >
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(generatedPrompts.jsonPrompt)
+                          toast({
+                            title: "Copied!",
+                            description: "JSON format copied to clipboard",
+                          })
+                          // Show toast notification after copying
+                          showToastAfterSuccess()
+                        }}
+                        className="text-xs h-8 px-3"
+                      >
                         Copy
-                    </Button>
+                      </Button>
+                    </div>
+                    <div className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                      <pre className="whitespace-pre-wrap text-sm leading-relaxed font-sans text-gray-800 dark:text-gray-200 overflow-x-auto">
+                        {generatedPrompts.jsonPrompt}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                      Use this structured format for technical AI processing and API integrations.
+                    </p>
                   </div>
-                  <div className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed font-sans text-gray-800 dark:text-gray-200 overflow-x-auto">
-                      {generatedPrompts.jsonPrompt}
-                    </pre>
-                  </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                    Use this structured format for technical AI processing and API integrations.
-                  </p>
-                </div>
                 )}
 
                 {/* Paragraph Format */}
                 {outputOptions.paragraphPrompt && generatedPrompts.paragraphPrompt && (
-                <div className="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <Type className="h-4 w-4 text-gray-600" />
-                    <h4 className="font-bold text-sm flex items-center gap-2">
-                      Paragraph Format (Creative)
-                    </h4>
+                        <h4 className="font-bold text-sm flex items-center gap-2">
+                          Paragraph Format (Creative)
+                        </h4>
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -804,32 +804,32 @@ export default function Veo3PromptGeneratorPage() {
                           </Tooltip>
                         </TooltipProvider>
                       </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={async () => {
-                        await navigator.clipboard.writeText(generatedPrompts.paragraphPrompt)
-                        toast({
-                          title: "Copied!",
-                          description: "Paragraph format copied to clipboard",
-                        })
-                        // Show toast notification after copying
-                        showToastAfterSuccess()
-                      }}
-                      className="text-xs h-8 px-3"
-                    >
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(generatedPrompts.paragraphPrompt)
+                          toast({
+                            title: "Copied!",
+                            description: "Paragraph format copied to clipboard",
+                          })
+                          // Show toast notification after copying
+                          showToastAfterSuccess()
+                        }}
+                        className="text-xs h-8 px-3"
+                      >
                         Copy
-                    </Button>
+                      </Button>
+                    </div>
+                    <div className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                      <pre className="whitespace-pre-wrap text-sm leading-relaxed font-sans text-gray-800 dark:text-gray-200">
+                        {generatedPrompts.paragraphPrompt}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                      Use this narrative format for creative AI processing and storytelling.
+                    </p>
                   </div>
-                  <div className="bg-white dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed font-sans text-gray-800 dark:text-gray-200">
-                      {generatedPrompts.paragraphPrompt}
-                    </pre>
-                  </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                    Use this narrative format for creative AI processing and storytelling.
-                  </p>
-                </div>
                 )}
 
                 {/* AI Info Box */}
@@ -874,7 +874,7 @@ export default function Veo3PromptGeneratorPage() {
           <CardHeader>
             <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-purple-600 flex items-center gap-2">
               <Brain className="h-5 w-5" />
-              How Veo3 Prompt Generator Works
+              {getTranslation(currentLocale, 'howVeo3Works')}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 xs:p-5">
@@ -884,8 +884,8 @@ export default function Veo3PromptGeneratorPage() {
                   <span className="text-purple-600 font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">Describe Your Video</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Use structured mode for detailed control or advanced mode for natural language input to describe your video concept.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'step1Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'step1Desc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -893,8 +893,8 @@ export default function Veo3PromptGeneratorPage() {
                   <span className="text-purple-600 font-bold text-sm">2</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">AI Prompt Generation</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Our advanced AI analyzes your input and generates both JSON and paragraph formats optimized for Veo3 AI video generation.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'step2Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'step2Desc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -902,8 +902,8 @@ export default function Veo3PromptGeneratorPage() {
                   <span className="text-purple-600 font-bold text-sm">3</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">Use with Veo3</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Copy the generated prompts and use them with Google's Veo3 AI to create professional-quality videos with your specifications.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'step3Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'step3Desc')}</p>
                 </div>
               </div>
             </div>
@@ -913,9 +913,9 @@ export default function Veo3PromptGeneratorPage() {
         {/* About Veo3 Prompt Generator */}
         <Card className="shadow-lg bg-white dark:bg-gray-800 mb-6 xs:mb-8 mx-1 xs:mx-2 sm:mx-0 rounded-lg">
           <CardContent className="p-4 xs:p-5">
-            <h3 className="text-lg xs:text-xl font-bold mb-3 xs:mb-4 text-purple-600">About Veo3 Prompt Generator</h3>
+            <h3 className="text-lg xs:text-xl font-bold mb-3 xs:mb-4 text-purple-600">{getTranslation(currentLocale, 'aboutVeo3Generator')}</h3>
             <p className="text-sm xs:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our Veo3 Prompt Generator is a specialized AI tool designed to create detailed, production-ready prompts for Google's Veo3 AI video generation platform. Whether you're a content creator, marketer, or video producer, our tool helps you transform your creative ideas into structured prompts that Veo3 can understand and execute perfectly. With both structured and advanced modes, you can either fill out detailed forms for precise control or use natural language for quick ideation. The generated prompts include scene descriptions, camera movements, lighting details, audio elements, and technical specifications optimized for Veo3's capabilities.
+            {getTranslation(currentLocale, 'aboutVeo3GeneratorDesc')}
             </p>
           </CardContent>
         </Card>
@@ -923,7 +923,7 @@ export default function Veo3PromptGeneratorPage() {
         {/* FAQ Section */}
         <Card className="shadow-lg bg-white dark:bg-gray-800 mx-1 xs:mx-2 sm:mx-0 rounded-lg">
           <CardHeader>
-            <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-purple-600">Frequently Asked Questions</CardTitle>
+            <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-purple-600">{getTranslation(currentLocale, 'veo3FaqTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="p-4 xs:p-5">
             <Accordion type="single" collapsible className="w-full">
@@ -939,11 +939,11 @@ export default function Veo3PromptGeneratorPage() {
           </CardContent>
         </Card>
       </div>
-      
+
       {/* Toast Notification */}
-      <ToastNotification 
-        isVisible={showToast} 
-        onClose={closeToast} 
+      <ToastNotification
+        isVisible={showToast}
+        onClose={closeToast}
       />
     </div>
   )

@@ -3,15 +3,16 @@
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { useState } from "react"
-import { Loader2, FileText, Lightbulb, Clock, Users, Target, Brain } from "lucide-react"
+import { Loader2, FileText, Brain } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { ToolNavigation } from "@/components/tool-navigation"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export default function VideoScriptGeneratorPage() {
-  const [activeTab, setActiveTab] = useState("video-script")
+  const currentLocale = useLocale()
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedScript, setGeneratedScript] = useState("")
   const { toast } = useToast()
@@ -25,72 +26,11 @@ export default function VideoScriptGeneratorPage() {
     language: "english",
   })
 
-  const audiences = [
-    { value: "general", label: "General Audience" },
-    { value: "teens", label: "Teenagers (13-19)" },
-    { value: "young-adults", label: "Young Adults (20-35)" },
-    { value: "professionals", label: "Professionals" },
-    { value: "parents", label: "Parents" },
-    { value: "seniors", label: "Seniors (55+)" },
-  ]
-
-  const scriptLengths = [
-    { value: "15-30s", label: "15-30 seconds" },
-    { value: "30-60s", label: "30-60 seconds" },
-    { value: "1-2min", label: "1-2 minutes" },
-    { value: "2-5min", label: "2-5 minutes" },
-    { value: "5-10min", label: "5-10 minutes" },
-  ]
-
-  const scriptStyles = [
-    { value: "conversational", label: "Conversational" },
-    { value: "professional", label: "Professional" },
-    { value: "energetic", label: "Energetic" },
-    { value: "educational", label: "Educational" },
-    { value: "storytelling", label: "Storytelling" },
-    { value: "promotional", label: "Promotional" },
-  ]
-
-  const languages = [
-    { value: "english", label: "English" },
-    { value: "vietnamese", label: "Vietnamese" },
-    { value: "french", label: "French" },
-    { value: "spanish", label: "Spanish" },
-    { value: "german", label: "German" },
-  ]
-
-  const faqs = [
-    {
-      question: "What types of videos can I create scripts for?",
-      answer: "Our Video Script Generator supports various video types including YouTube content, TikTok videos, marketing campaigns, educational content, product demonstrations, storytelling videos, and promotional materials."
-    },
-    {
-      question: "How accurate are the generated scripts?",
-      answer: "Our AI-powered script generator creates highly accurate and engaging scripts tailored to your specific audience and style preferences. The scripts are optimized for maximum engagement and conversion rates."
-    },
-    {
-      question: "Can I customize the script style and tone?",
-      answer: "Yes! You can choose from multiple script styles including conversational, professional, energetic, educational, storytelling, and promotional. Each style is optimized for different content types and audiences."
-    },
-    {
-      question: "What languages are supported?",
-      answer: "We support multiple languages including English, Vietnamese, French, Spanish, and German. More languages are being added regularly to serve our global user base."
-    },
-    {
-      question: "How long does script generation take?",
-      answer: "Script generation typically takes 10-30 seconds depending on the complexity and length of your requirements. Our optimized AI ensures fast and reliable results."
-    },
-    {
-      question: "Can I use the generated scripts commercially?",
-      answer: "Absolutely! All generated scripts are yours to use for any purpose, including commercial projects, client work, and personal content creation."
-    }
-  ]
-
   const generateScript = async () => {
-    if (!formData.videoTopic.trim() || !formData.audience || !formData.scriptLength || !formData.scriptStyle) {
+    if (!formData.videoTopic.trim()) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
+        title: getTranslation(currentLocale, 'missingInformation'),
+        description: getTranslation(currentLocale, 'missingInformationDesc'),
         variant: "destructive",
       })
       return
@@ -111,14 +51,14 @@ export default function VideoScriptGeneratorPage() {
 
       setGeneratedScript(data.script)
       toast({
-        title: "Script generated successfully!",
-        description: "Your video script is ready.",
+        title: getTranslation(currentLocale, 'scriptGeneratedSuccessfully'),
+        description: getTranslation(currentLocale, 'scriptGeneratedDesc'),
       })
     } catch (error) {
       console.error("Error generating script:", error)
       toast({
-        title: "Generation failed",
-        description: error instanceof Error ? error.message : "Failed to generate script. Please try again.",
+        title: getTranslation(currentLocale, 'generationFailed'),
+        description: error instanceof Error ? error.message : getTranslation(currentLocale, 'generationFailedDesc'),
         variant: "destructive",
       })
     } finally {
@@ -139,15 +79,15 @@ export default function VideoScriptGeneratorPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-black dark:from-black dark:from-black">
-      <div className="max-w-[720px] mx-auto px-2 xs:px-3 sm:px-4 pt-6 xs:pt-8 sm:pt-10">
+      <div className="max-w-[720px] mx-auto px-2 xs:px-3 sm:px-4 pt-6 xs:pt-8 sm:pt-10 pb-8">
         {/* Headline with Accent Color */}
         <h1 className="text-center text-3xl xs:text-4xl sm:text-5xl lg:text-5xl font-bold mb-2 xs:mb-3 px-1">
-          Video Script Generator <span className="text-blue-600">Free Online</span>
+          {getTranslation(currentLocale, 'videoScriptGeneratorTitle')} <span className="text-blue-600">{getTranslation(currentLocale, 'videoScriptGeneratorFreeOnline')}</span>
         </h1>
 
         {/* Description */}
         <p className="text-gray-700 dark:text-gray-300 text-center mb-4 xs:mb-6 max-w-2xl mx-auto text-sm xs:text-base px-2">
-          Create compelling video scripts with our AI-powered generator. Perfect for YouTube, TikTok, Instagram, and social media content creators.
+          {getTranslation(currentLocale, 'videoScriptGeneratorSubtitle')}
         </p>
 
         {/* Navigation Tabs */}
@@ -158,11 +98,11 @@ export default function VideoScriptGeneratorPage() {
           <CardContent className="p-4 xs:p-5 sm:p-6">
             {/* Video Topic & Main Characters */}
             <div className="mb-4 xs:mb-6">
-              <label className="text-sm xs:text-base font-bold mb-2 block">Video Topic & Main Characters:</label>
+              <label className="text-sm xs:text-base font-bold mb-2 block">{getTranslation(currentLocale, 'videoTopicAndCharacters')}</label>
               <Textarea
                 value={formData.videoTopic}
                 onChange={(e) => setFormData({ ...formData, videoTopic: e.target.value })}
-                placeholder="Example: A short film about a lonely robot who finds a flower, featuring a curious robot and a vibrant, glowing flower."
+                placeholder={getTranslation(currentLocale, 'videoTopicExample')}
                 className="min-h-[60px] xs:min-h-[80px] resize-none text-sm xs:text-base rounded-lg"
               />
             </div>
@@ -177,12 +117,12 @@ export default function VideoScriptGeneratorPage() {
                 {isGenerating ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Generating Script...
+                    {getTranslation(currentLocale, 'generatingScript')}
                   </>
                 ) : (
                   <>
                     <FileText className="mr-2 h-4 w-4" />
-                    Generate Script
+                    {getTranslation(currentLocale, 'generateScript')}
                   </>
                 )}
               </Button>
@@ -192,14 +132,14 @@ export default function VideoScriptGeneratorPage() {
                 className="h-10 xs:h-12 px-4 xs:px-6 text-sm xs:text-base rounded-lg"
                 disabled={isGenerating || !formData.videoTopic.trim()}
               >
-                Clear
+                {getTranslation(currentLocale, 'clearForm')}
               </Button>
             </div>
 
             {/* Result Container */}
             {generatedScript && (
               <div className="mt-4 xs:mt-6 p-4 xs:p-5 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <h4 className="font-bold mb-2 text-sm xs:text-base">Generated Script:</h4>
+                <h4 className="font-bold mb-2 text-sm xs:text-base">{getTranslation(currentLocale, 'generatedScriptTitle')}</h4>
                 <pre className="whitespace-pre-wrap text-sm xs:text-base overflow-x-auto">{generatedScript}</pre>
               </div>
             )}
@@ -211,7 +151,7 @@ export default function VideoScriptGeneratorPage() {
           <CardHeader>
             <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-blue-600 flex items-center gap-2">
               <Brain className="h-5 w-5" />
-              How Video Script Generator Works
+              {getTranslation(currentLocale, 'howVideoScriptGeneratorWorks')}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 xs:p-5">
@@ -221,8 +161,8 @@ export default function VideoScriptGeneratorPage() {
                   <span className="text-blue-600 font-bold text-sm">1</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">Describe Your Video</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Enter your video topic and describe the main characters or elements you want to include in your script.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'scriptStep1Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'scriptStep1Desc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -230,8 +170,8 @@ export default function VideoScriptGeneratorPage() {
                   <span className="text-blue-600 font-bold text-sm">2</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">AI Generation</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Our advanced AI analyzes your input and generates a professional video script with proper structure and flow.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'scriptStep2Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'scriptStep2Desc')}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -239,8 +179,8 @@ export default function VideoScriptGeneratorPage() {
                   <span className="text-blue-600 font-bold text-sm">3</span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-sm xs:text-base mb-1">Download & Use</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Copy the generated script and use it for your video production, with clear scene descriptions and dialogue.</p>
+                  <h4 className="font-semibold text-sm xs:text-base mb-1">{getTranslation(currentLocale, 'scriptStep3Title')}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{getTranslation(currentLocale, 'scriptStep3Desc')}</p>
                 </div>
               </div>
             </div>
@@ -250,9 +190,9 @@ export default function VideoScriptGeneratorPage() {
         {/* Simple Paragraph About the Tool */}
         <Card className="shadow-lg bg-white dark:bg-gray-800 mb-6 xs:mb-8 mx-1 xs:mx-2 sm:mx-0 rounded-lg">
           <CardContent className="p-4 xs:p-5">
-            <h3 className="text-lg xs:text-xl font-bold mb-3 xs:mb-4 text-blue-600">About Video Script Generator</h3>
+            <h3 className="text-lg xs:text-xl font-bold mb-3 xs:mb-4 text-blue-600">{getTranslation(currentLocale, 'aboutVideoScriptGenerator')}</h3>
             <p className="text-sm xs:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-              Our Video Script Generator is a powerful AI-driven tool designed to help content creators, filmmakers, and video producers create compelling scripts quickly and efficiently. By simply describing your video concept and main characters, our advanced AI generates professional-quality scripts that include scene descriptions, character dialogue, and narrative flow. This tool is perfect for YouTube creators, social media influencers, marketing teams, and anyone who needs to produce engaging video content with a clear, structured script.
+              {getTranslation(currentLocale, 'aboutVideoScriptGeneratorDesc')}
             </p>
           </CardContent>
         </Card>
@@ -260,32 +200,32 @@ export default function VideoScriptGeneratorPage() {
         {/* FAQ Section */}
         <Card className="shadow-lg bg-white dark:bg-gray-800 mx-1 xs:mx-2 sm:mx-0 rounded-lg">
           <CardHeader>
-            <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-blue-600">Frequently Asked Questions</CardTitle>
+            <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-blue-600">{getTranslation(currentLocale, 'videoScriptFaqTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="p-4 xs:p-5">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger className="text-sm xs:text-base">What types of videos can I create scripts for?</AccordionTrigger>
+                <AccordionTrigger className="text-sm xs:text-base">{getTranslation(currentLocale, 'faqVideoTypesQuestion')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-gray-600 dark:text-gray-400">
-                  Our Video Script Generator can create scripts for various video types including YouTube videos, TikTok content, Instagram Reels, educational videos, promotional content, storytelling videos, and more. Just describe your concept and the AI will adapt the script accordingly.
+                  {getTranslation(currentLocale, 'faqVideoTypesAnswer')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger className="text-sm xs:text-base">How long are the generated scripts?</AccordionTrigger>
+                <AccordionTrigger className="text-sm xs:text-base">{getTranslation(currentLocale, 'faqScriptLengthQuestion')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-gray-600 dark:text-gray-400">
-                  Script length varies based on your input and requirements. You can specify if you need a short 30-second script or a longer 5-10 minute video script. The AI will adjust the content and detail level accordingly.
+                  {getTranslation(currentLocale, 'faqScriptLengthAnswer')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger className="text-sm xs:text-base">Can I edit the generated script?</AccordionTrigger>
+                <AccordionTrigger className="text-sm xs:text-base">{getTranslation(currentLocale, 'faqEditScriptQuestion')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-gray-600 dark:text-gray-400">
-                  Absolutely! The generated script is a starting point that you can copy, edit, and customize to match your specific needs, style, and brand voice. Feel free to modify dialogue, add details, or adjust the structure.
+                  {getTranslation(currentLocale, 'faqEditScriptAnswer')}
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-4">
-                <AccordionTrigger className="text-sm xs:text-base">Is the script suitable for commercial use?</AccordionTrigger>
+                <AccordionTrigger className="text-sm xs:text-base">{getTranslation(currentLocale, 'faqCommercialUseQuestion')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-gray-600 dark:text-gray-400">
-                  Yes, the scripts generated by our tool are free to use for both personal and commercial projects. However, we recommend reviewing and customizing the content to ensure it aligns with your brand guidelines and legal requirements.
+                  {getTranslation(currentLocale, 'faqCommercialUseAnswer')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

@@ -3,12 +3,11 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Zap, 
-  Brain, 
-  Globe, 
-  Shield, 
-  TrendingUp, 
+import {
+  Zap,
+  Brain,
+  Globe,
+  Shield,
   Award,
   Video,
   FileText,
@@ -16,28 +15,31 @@ import {
   Mic
 } from "lucide-react"
 import Link from "next/link"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export function MainHero() {
+  const currentLocale = useLocale()
   const features = [
     {
       icon: Zap,
-      title: "Lightning Fast",
-      description: "Get results in seconds with optimized AI algorithms"
+      title: getTranslation(currentLocale, 'lightningFast'),
+      description: getTranslation(currentLocale, 'lightningFastDesc')
     },
     {
       icon: Shield,
-      title: "Secure & Private",
-      description: "Enterprise-grade security with automatic file deletion"
+      title: getTranslation(currentLocale, 'securePrivate'),
+      description: getTranslation(currentLocale, 'securePrivateDesc')
     },
     {
       icon: Brain,
-      title: "Advanced AI",
-      description: "Powered by Gemini 2.5 Pro with intelligent fallback"
+      title: getTranslation(currentLocale, 'advancedAI'),
+      description: getTranslation(currentLocale, 'advancedAIDesc')
     },
     {
       icon: Globe,
-      title: "Multi-Format",
-      description: "Support for images, videos, and audio files"
+      title: getTranslation(currentLocale, 'multiFormat'),
+      description: getTranslation(currentLocale, 'multiFormatDesc')
     }
   ]
 
@@ -45,22 +47,21 @@ export function MainHero() {
     <section className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-black dark:from-black dark:from-black">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      
+
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Content */}
           <div className="mb-8 sm:mb-12">
             <Badge variant="secondary" className="mb-4 px-3 py-1 text-sm font-medium bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-              🚀 AI-Powered Content Generation
+              {getTranslation(currentLocale, 'aiPoweredBadge')}
             </Badge>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              Veo3 <span className="text-purple-700 dark:text-purple-700">prompt generator</span> Free
+              {getTranslation(currentLocale, 'mainHeading')} <span className="text-purple-700 dark:text-purple-700">{getTranslation(currentLocale, 'accentWord')}</span> {getTranslation(currentLocale, 'heroFree')}
             </h1>
-            
+
             <p className="text-sm xs:text-base sm:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Transform your ideas into professional video prompts and scripts with cutting-edge AI technology. 
-              Perfect for content creators, marketers, and businesses.
+              {getTranslation(currentLocale, 'footerDescription')}
             </p>
 
             {/* Main Action Buttons - Mobile Optimized */}
@@ -68,13 +69,13 @@ export function MainHero() {
               <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg">
                 <Link href="/veo3-prompt-generator">
                   <Video className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                  Veo3 Prompt Generator
+                  {getTranslation(currentLocale, 'veo3PromptGenerator')}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg">
                 <Link href="/video-script-generator">
                   <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-                  Video Script Generator
+                  {getTranslation(currentLocale, 'videoScriptGenerator')}
                 </Link>
               </Button>
             </div>
@@ -84,26 +85,30 @@ export function MainHero() {
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
                 <Link href="/video-to-prompt">
                   <Camera className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  Video to Prompt
-                </Link>
-              </Button>
-              <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
-                <Link href="/transcription">
-                  <Mic className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  Transcription
+                  {getTranslation(currentLocale, 'videoToPrompt')}
                 </Link>
               </Button>
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
                 <Link href="/prompt-guide">
                   <Brain className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  Prompt Guide
+                  {getTranslation(currentLocale, 'promptGuide')}
                 </Link>
               </Button>
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
                 <Link href="/prompt-library">
                   <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  Prompt Library
+                  {getTranslation(currentLocale, 'promptLibrary')}
                 </Link>
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-xs sm:text-sm opacity-50 cursor-not-allowed"
+                disabled
+                onClick={(e) => e.preventDefault()}
+              >
+                <Mic className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                {getTranslation(currentLocale, 'transcription')}
               </Button>
             </div>
           </div>

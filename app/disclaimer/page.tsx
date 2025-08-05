@@ -1,12 +1,19 @@
+"use client"
+
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
+
 export default function DisclaimerPage() {
+  const currentLocale = useLocale()
+  
   return (
     <main>
       <section className="py-16 bg-gradient-to-br from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            <span className="text-primary">Disclaimer</span>
+            <span className="text-primary">{getTranslation(currentLocale, 'disclaimerTitle')}</span>
           </h1>
-          <p className="text-lg text-muted-foreground">Last updated: {new Date().toLocaleDateString()}</p>
+          <p className="text-lg text-muted-foreground">{getTranslation(currentLocale, 'lastUpdated')}: {new Date().toLocaleDateString()}</p>
         </div>
       </section>
 
@@ -15,127 +22,100 @@ export default function DisclaimerPage() {
           <div className="max-w-4xl mx-auto prose prose-lg">
             <div className="space-y-8">
               <section>
-                <h2 className="text-2xl font-bold mb-4">General Information</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'generalInformation')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  The information on this website is provided on an "as is" basis. To the fullest extent permitted by
-                  law, VeO3 Prompt Generator excludes all representations, warranties, obligations, and liabilities
-                  arising out of or in connection with this website and its contents or which is or may be provided by
-                  any affiliates or any other third party, including in relation to any inaccuracies or omissions in
-                  this website and/or the company's literature.
+                  {getTranslation(currentLocale, 'generalInformationDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">AI-Generated Content</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'aiGeneratedContent')}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  Our service uses artificial intelligence to analyze content and generate prompts for video creation.
-                  Please be aware that:
+                  {getTranslation(currentLocale, 'aiGeneratedContentDesc')}
                 </p>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>AI-generated prompts and scripts may not always be 100% accurate or complete</li>
-                  <li>The quality of output depends on the quality and clarity of input content</li>
-                  <li>Generated content should be reviewed and verified before use in professional contexts</li>
-                  <li>We do not guarantee the accuracy, completeness, or reliability of AI-generated content</li>
-                  <li>AI models may occasionally produce unexpected or inappropriate results</li>
-                  <li>Generated content may require human editing and refinement</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem1')}</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem2')}</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem3')}</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem4')}</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem5')}</li>
+                  <li>{getTranslation(currentLocale, 'aiContentItem6')}</li>
                 </ul>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">User Responsibility</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">Users are responsible for:</p>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'userResponsibility')}</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">{getTranslation(currentLocale, 'userResponsibilityDesc')}</p>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>Ensuring they have the right to upload and process any media content</li>
-                  <li>Complying with all applicable laws and regulations</li>
-                  <li>Not uploading content that violates intellectual property rights</li>
-                  <li>Not uploading inappropriate, offensive, or illegal content</li>
-                  <li>Verifying the accuracy and appropriateness of generated prompts before use</li>
-                  <li>Ensuring generated content complies with platform guidelines and policies</li>
-                  <li>Respecting copyright and trademark laws when using generated content</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem1')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem2')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem3')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem4')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem5')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem6')}</li>
+                  <li>{getTranslation(currentLocale, 'userRespItem7')}</li>
                 </ul>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Limitation of Liability</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'limitationOfLiability')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  To the maximum extent permitted by applicable law, VeO3 Prompt Generator shall not be liable for any
-                  indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues,
-                  whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible
-                  losses, resulting from your use of our service, including but not limited to damages arising from the
-                  use of AI-generated content.
+                  {getTranslation(currentLocale, 'limitationOfLiabilityDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Service Availability</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'serviceAvailability')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We strive to maintain high service availability, but we do not guarantee that our service will be
-                  available at all times. The service may be temporarily unavailable due to maintenance, updates, or
-                  technical issues. We reserve the right to modify, suspend, or discontinue any part of our service at
-                  any time without notice. AI processing times may vary based on system load and content complexity.
+                  {getTranslation(currentLocale, 'serviceAvailabilityDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Third-Party Content and Services</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'thirdPartyContent')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our website may contain links to third-party websites, services, or reference third-party content. We
-                  do not endorse, warrant, or assume responsibility for the accuracy or reliability of any information
-                  offered by third-party websites or services. Users access third-party content at their own risk. We
-                  are not responsible for the availability, content, or practices of external sites.
+                  {getTranslation(currentLocale, 'thirdPartyContentDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Professional Advice</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'professionalAdvice')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  The information and tools provided by VeO3 Prompt Generator are for general informational purposes
-                  only and should not be considered as professional advice. Users should consult with qualified
-                  professionals for specific advice related to their particular circumstances, especially for commercial
-                  or professional video production projects.
+                  {getTranslation(currentLocale, 'professionalAdviceDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Intellectual Property</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'intellectualProperty')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  While we provide tools to generate content, users are responsible for ensuring that their use of
-                  generated content does not infringe on the intellectual property rights of others. We do not guarantee
-                  that generated content is free from copyright, trademark, or other intellectual property claims. Users
-                  should conduct their own due diligence before using generated content commercially.
+                  {getTranslation(currentLocale, 'intellectualPropertyDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Data Processing</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'dataProcessing')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our AI processing involves analyzing uploaded content to generate prompts and scripts. While we
-                  implement security measures and delete uploaded files immediately after processing, users should be
-                  aware that any content uploaded to our service will be processed by our AI systems. Users should not
-                  upload confidential or sensitive information.
+                  {getTranslation(currentLocale, 'dataProcessingDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Changes to This Disclaimer</h2>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'changesToDisclaimer')}</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We reserve the right to modify this disclaimer at any time. Changes will be effective immediately upon
-                  posting on this website. Your continued use of our service after any changes constitutes acceptance of
-                  the new disclaimer. We encourage users to review this disclaimer periodically.
+                  {getTranslation(currentLocale, 'changesToDisclaimerDesc')}
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-                <p className="text-muted-foreground mb-4">
-                  If you have any questions about this disclaimer, please contact us at:
-                </p>
+                <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'contactInformation')}</h2>
+                <p className="text-muted-foreground mb-4">{getTranslation(currentLocale, 'contactInformationDesc')}</p>
                 <div className="bg-muted rounded-lg p-4">
-                  <p className="font-medium">Email: legal@veo3promgenerator.com</p>
-                  <p className="font-medium">Address: 123 Innovation Drive, San Francisco, CA 94105</p>
-                  <p className="font-medium">Phone: +1 (555) 123-4567</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'email')}: legal@veo3promgenerator.com</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'address')}: 123 Innovation Drive, San Francisco, CA 94105</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'phone')}: +1 (555) 123-4567</p>
                 </div>
               </section>
+
             </div>
           </div>
         </div>

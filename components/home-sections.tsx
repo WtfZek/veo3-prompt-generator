@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -28,58 +30,62 @@ import {
 } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Link from "next/link"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export function HomeSections() {
+  const currentLocale = useLocale()
+  
   const features = [
     {
       icon: Zap,
-      title: "Lightning Fast Processing",
-      description: "Get results in seconds with our optimized AI algorithms and cloud infrastructure with automatic fallback."
+      title: getTranslation(currentLocale, 'lightningFastProcessing'),
+      description: getTranslation(currentLocale, 'lightningFastProcessingDesc')
     },
     {
       icon: Shield,
-      title: "Secure & Private",
-      description: "Your files are processed securely and deleted immediately after processing with enterprise-grade security."
+      title: getTranslation(currentLocale, 'securePrivate'),
+      description: getTranslation(currentLocale, 'securePrivateDesc2')
     },
     {
       icon: Brain,
-      title: "Advanced AI Models",
-      description: "Powered by Gemini 2.5 Pro with intelligent fallback to OpenRouter for maximum reliability."
+      title: getTranslation(currentLocale, 'advancedAIModels'),
+      description: getTranslation(currentLocale, 'advancedAIModelsDesc')
     },
     {
       icon: Globe,
-      title: "Multiple Formats",
-      description: "Support for various image and video formats including JPG, PNG, MP4, and more with intelligent processing."
+      title: getTranslation(currentLocale, 'multipleFormats'),
+      description: getTranslation(currentLocale, 'multipleFormatsDesc')
     },
     {
       icon: TrendingUp,
-      title: "Real-time Processing",
-      description: "Watch your content generate in real-time with live progress indicators and fallback protection."
+      title: getTranslation(currentLocale, 'realTimeProcessing'),
+      description: getTranslation(currentLocale, 'realTimeProcessingDesc')
     },
     {
       icon: Award,
-      title: "Premium Quality",
-      description: "High-quality outputs suitable for professional use and creative projects with AI-powered enhancement."
+      title: getTranslation(currentLocale, 'premiumQuality'),
+      description: getTranslation(currentLocale, 'premiumQualityDesc')
     }
   ]
 
   const steps = [
     {
       icon: Upload,
-      title: "Upload Your Content",
-      description: "Simply drag and drop your images, videos, or text, or click to browse and select files from your device.",
+      title: getTranslation(currentLocale, 'uploadYourContent'),
+      description: getTranslation(currentLocale, 'uploadYourContentDesc'),
       step: "01"
     },
     {
       icon: Brain,
-      title: "AI Analysis",
-      description: "Our advanced AI analyzes your content, understanding context, objects, scenes, and emotions.",
+      title: getTranslation(currentLocale, 'aiAnalysis'),
+      description: getTranslation(currentLocale, 'aiAnalysisDesc'),
       step: "02"
     },
     {
       icon: Download,
-      title: "Get Your Results",
-      description: "Receive detailed outputs in multiple formats - JSON for developers, paragraphs for creators.",
+      title: getTranslation(currentLocale, 'getYourResults'),
+      description: getTranslation(currentLocale, 'getYourResultsDesc'),
       step: "03"
     }
   ]
@@ -87,26 +93,26 @@ export function HomeSections() {
   const tools = [
     {
       icon: Video,
-      title: "Veo3 Prompt Generator",
-      description: "Create detailed prompts for Google's Veo3 AI video generation with structured forms and advanced chat modes.",
+      title: getTranslation(currentLocale, 'veo3PromptGenerator'),
+      description: getTranslation(currentLocale, 'veo3PromptGeneratorDesc'),
       link: "/veo3-prompt-generator"
     },
     {
       icon: FileText,
-      title: "Video Script Generator",
-      description: "Generate professional video scripts for YouTube, TikTok, Instagram, and marketing campaigns.",
+      title: getTranslation(currentLocale, 'videoScriptGenerator'),
+      description: getTranslation(currentLocale, 'videoScriptGeneratorDesc'),
       link: "/video-script-generator"
     },
     {
       icon: Camera,
-      title: "Video to Prompt",
-      description: "Convert existing videos into detailed prompts for AI video generation tools.",
+      title: getTranslation(currentLocale, 'videoToPrompt'),
+      description: getTranslation(currentLocale, 'videoToPromptDesc'),
       link: "/video-to-prompt"
     },
     {
       icon: Mic,
-      title: "Audio Transcription",
-      description: "Transcribe audio files with high accuracy and multiple output formats.",
+      title: getTranslation(currentLocale, 'transcription'),
+      description: getTranslation(currentLocale, 'transcriptionDesc'),
       link: "/transcription"
     }
   ]
@@ -114,73 +120,73 @@ export function HomeSections() {
   const benefits = [
     {
       icon: Rocket,
-      title: "Save Hours of Work",
-      description: "Transform your ideas into production-ready content in minutes instead of hours of manual work."
+      title: getTranslation(currentLocale, 'saveHoursOfWork'),
+      description: getTranslation(currentLocale, 'saveHoursOfWorkDesc')
     },
     {
       icon: Users,
-      title: "Professional Quality",
-      description: "Access enterprise-grade AI techniques used by top content creators and marketing agencies."
+      title: getTranslation(currentLocale, 'professionalQuality'),
+      description: getTranslation(currentLocale, 'professionalQualityDesc')
     },
     {
       icon: Heart,
-      title: "Creative Freedom",
-      description: "Focus on your creative vision while our AI handles the technical complexities."
+      title: getTranslation(currentLocale, 'creativeFreedom'),
+      description: getTranslation(currentLocale, 'creativeFreedomDesc')
     },
     {
       icon: TrendingUp,
-      title: "Better Results",
-      description: "Generate more engaging, consistent, and high-quality content with optimized AI processing."
+      title: getTranslation(currentLocale, 'betterResults'),
+      description: getTranslation(currentLocale, 'betterResultsDesc')
     }
   ]
 
   const whoCanBenefit = [
     {
-      category: "Content Creators",
-      description: "YouTubers, TikTok creators, and social media influencers who need engaging content quickly and consistently.",
+      category: getTranslation(currentLocale, 'contentCreators'),
+      description: getTranslation(currentLocale, 'contentCreatorsDesc'),
       icon: Video
     },
     {
-      category: "Marketing Teams",
-      description: "Digital marketers and agencies creating campaigns, product demos, and brand storytelling content.",
+      category: getTranslation(currentLocale, 'marketingTeams'),
+      description: getTranslation(currentLocale, 'marketingTeamsDesc'),
       icon: Target
     },
     {
-      category: "Educators",
-      description: "Teachers, trainers, and educational content creators developing engaging learning materials and tutorials.",
+      category: getTranslation(currentLocale, 'educators'),
+      description: getTranslation(currentLocale, 'educatorsDesc'),
       icon: Lightbulb
     },
     {
-      category: "Businesses",
-      description: "Companies and entrepreneurs creating promotional content, product demonstrations, and corporate communications.",
+      category: getTranslation(currentLocale, 'businesses'),
+      description: getTranslation(currentLocale, 'businessesDesc'),
       icon: Shield
     }
   ]
 
   const faqs = [
     {
-      question: "How accurate are the AI-generated outputs?",
-      answer: "Our AI models achieve 99.5% accuracy in content generation, with continuous improvements through machine learning and user feedback."
+      question: getTranslation(currentLocale, 'faqAccuracy'),
+      answer: getTranslation(currentLocale, 'faqAccuracyAnswer')
     },
     {
-      question: "What file formats are supported?",
-      answer: "We support all major image formats (JPG, PNG, GIF, WebP) and video formats (MP4, AVI, MOV, WebM) up to 100MB per file."
+      question: getTranslation(currentLocale, 'faqFormats'),
+      answer: getTranslation(currentLocale, 'faqFormatsAnswer')
     },
     {
-      question: "Is my uploaded content secure?",
-      answer: "Yes, all files are processed securely and automatically deleted after processing. We use enterprise-grade encryption and never store your content permanently."
+      question: getTranslation(currentLocale, 'faqSecurity'),
+      answer: getTranslation(currentLocale, 'faqSecurityAnswer')
     },
     {
-      question: "Can I use the generated content commercially?",
-      answer: "Absolutely! All generated content is yours to use for any purpose, including commercial projects and client work."
+      question: getTranslation(currentLocale, 'faqCommercial'),
+      answer: getTranslation(currentLocale, 'faqCommercialAnswer')
     },
     {
-      question: "How long does processing take?",
-      answer: "Most files are processed within 10-30 seconds. Larger files or complex content may take up to 2 minutes."
+      question: getTranslation(currentLocale, 'faqProcessingTime'),
+      answer: getTranslation(currentLocale, 'faqProcessingTimeAnswer')
     },
     {
-      question: "Do you offer API access?",
-      answer: "Yes, we provide RESTful API access for developers. Contact us for API documentation and pricing information."
+      question: getTranslation(currentLocale, 'faqAPI'),
+      answer: getTranslation(currentLocale, 'faqAPIAnswer')
     }
   ]
 
@@ -191,10 +197,10 @@ export function HomeSections() {
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 xs:mb-8 sm:mb-12">
             <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-              Our <span className="text-purple-600">AI Tools</span>
+              {getTranslation(currentLocale, 'ourAITools')}
             </h2>
             <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 xs:px-4">
-              Discover our comprehensive suite of AI-powered tools designed for content creators and professionals.
+              {getTranslation(currentLocale, 'ourAIToolsDesc')}
             </p>
           </div>
 
@@ -209,7 +215,7 @@ export function HomeSections() {
                   <p className="text-muted-foreground text-xs xs:text-sm sm:text-base mb-4">{tool.description}</p>
                   <Button asChild variant="outline" size="sm">
                     <Link href={tool.link}>
-                      Try Now
+                      {getTranslation(currentLocale, 'tryNow')}
                     </Link>
                   </Button>
                 </CardContent>
@@ -224,10 +230,10 @@ export function HomeSections() {
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 xs:mb-8 sm:mb-12">
             <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-              Why Choose <span className="text-purple-600">Our Platform</span>
+              {getTranslation(currentLocale, 'whyChoose')} <span className="text-purple-600">{getTranslation(currentLocale, 'ourPlatform')}</span>
             </h2>
             <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 xs:px-4">
-              Experience the most advanced AI-powered content generation platform with enterprise-grade features and reliability.
+              {getTranslation(currentLocale, 'whyChooseDesc')}
             </p>
           </div>
 
@@ -252,10 +258,10 @@ export function HomeSections() {
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 xs:mb-8 sm:mb-12">
             <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-              How It <span className="text-purple-600">Works</span>
+              {getTranslation(currentLocale, 'howItWorks')}
             </h2>
             <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 xs:px-4">
-              Transform your ideas into powerful content in just three simple steps.
+              {getTranslation(currentLocale, 'howItWorksDesc')}
             </p>
           </div>
 
@@ -283,10 +289,10 @@ export function HomeSections() {
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 xs:mb-8 sm:mb-12">
             <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-              Key <span className="text-purple-600">Benefits</span>
+              {getTranslation(currentLocale, 'keyBenefits')}
             </h2>
             <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 xs:px-4">
-              Discover how our AI platform can transform your content creation workflow.
+              {getTranslation(currentLocale, 'keyBenefitsDesc')}
             </p>
           </div>
 
@@ -316,31 +322,31 @@ export function HomeSections() {
                 <div className="mb-4">
                   <Button asChild variant="outline" className="px-3 py-1 text-sm font-medium border-green-500 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20">
                     <Link href="https://trustpilot.com" target="_blank" rel="noopener noreferrer">
-                      ⭐ Review us on Trustpilot
+                      {getTranslation(currentLocale, 'reviewUsOnTrustpilot')}
                     </Link>
                   </Button>
                 </div>
                 
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
-                  About <span className="text-purple-600 dark:text-purple-400">Veo3 Prompt Generator</span>
+                  {getTranslation(currentLocale, 'aboutVeo3PromptGenerator')}
                 </h2>
                 
                 <div className="space-y-4">
                   <p className="text-[15px] sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Our mission is to revolutionize the way people create content, empowering them to unlock new levels of creativity and efficiency through AI-powered tools. We understand the challenges that content creators, marketers, and businesses face in today's fast-paced digital landscape, where quality content is essential for success.
+                    {getTranslation(currentLocale, 'aboutDesc1')}
                   </p>
                   <p className="text-[15px] sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Join our team of expert AI engineers who created Veo3 Prompt Generator on this journey of unlocking AI's full potential. We believe in making AI accessible and easy-to-use through our expertly curated prompt generation tools. Our platform combines cutting-edge technology with intuitive design, ensuring that even beginners can create professional-quality content while providing advanced features for experienced users.
+                    {getTranslation(currentLocale, 'aboutDesc2')}
                   </p>
                   <p className="text-[15px] sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                    With years of experience in AI development and content creation, we've built a comprehensive suite of tools that cater to diverse needs. From Veo3 prompt generation to video script creation, our platform offers everything you need to bring your creative vision to life. We're committed to continuous innovation, regularly updating our AI models and features to stay ahead of industry trends and user needs.
+                    {getTranslation(currentLocale, 'aboutDesc3')}
                   </p>
                 </div>
                 
                 <div className="mt-6">
                   <Button asChild variant="outline" className="border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20">
                     <Link href="/about">
-                      Read More About Us
+                      {getTranslation(currentLocale, 'readMoreAboutUs')}
                     </Link>
                   </Button>
                 </div>
@@ -355,10 +361,10 @@ export function HomeSections() {
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 xs:mb-8 sm:mb-12">
             <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-              Frequently Asked <span className="text-purple-600">Questions</span>
+              {getTranslation(currentLocale, 'frequentlyAskedQuestions')}
             </h2>
             <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-3 xs:px-4">
-              Find answers to common questions about our AI platform
+              {getTranslation(currentLocale, 'faqDesc')}
             </p>
           </div>
 
@@ -402,17 +408,17 @@ export function HomeSections() {
               <section className="py-8 xs:py-12 sm:py-16 bg-gradient-to-br from-purple-600 to-purple-800 dark:from-black dark:from-black dark:from-black text-white">
         <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 xs:mb-3 sm:mb-4">
-            Ready to Transform Your Content?
+            {getTranslation(currentLocale, 'readyToTransform')}
           </h2>
           <p className="text-sm xs:text-lg sm:text-xl mb-4 xs:mb-6 sm:mb-8 max-w-2xl mx-auto opacity-90 px-3 xs:px-4">
-            Join thousands of creators who are already using our AI platform to create amazing content.
+            {getTranslation(currentLocale, 'readyToTransformDesc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100 h-10 xs:h-12 sm:h-14 px-4 xs:px-6 sm:px-8 text-sm xs:text-base sm:text-lg">
-              <Link href="/veo3-prompt-generator">Get Started Free</Link>
+              <Link href="/veo3-prompt-generator">{getTranslation(currentLocale, 'getStartedFree')}</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 h-10 xs:h-12 sm:h-14 px-4 xs:px-6 sm:px-8 text-sm xs:text-base sm:text-lg">
-              <Link href="/tools">Explore All Tools</Link>
+              <Link href="/tools">{getTranslation(currentLocale, 'exploreAllTools')}</Link>
             </Button>
           </div>
         </div>

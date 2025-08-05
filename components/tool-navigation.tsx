@@ -2,36 +2,41 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 interface ToolNavigationProps {
   activeTool: "veo3-prompt-generator" | "video-script-generator" | "video-to-prompt" | "transcription"
 }
 
 export function ToolNavigation({ activeTool }: ToolNavigationProps) {
+  const currentLocale = useLocale()
+  
   const tools = [
     {
       id: "veo3-prompt-generator",
-      name: "Veo3 Prompt Generator",
+      name: getTranslation(currentLocale, 'veo3PromptGeneratorTab'),
       href: "/veo3-prompt-generator",
       color: "purple"
     },
     {
       id: "video-script-generator", 
-      name: "Video Script Generator",
+      name: getTranslation(currentLocale, 'videoScriptGeneratorTab'),
       href: "/video-script-generator",
       color: "blue"
     },
     {
       id: "video-to-prompt",
-      name: "Video to Prompt Generator", 
+      name: getTranslation(currentLocale, 'videoToPromptGeneratorTab'), 
       href: "/video-to-prompt",
       color: "green"
     },
     {
       id: "transcription",
-      name: "Video Transcription",
-      href: "/transcription", 
-      color: "orange"
+      name: getTranslation(currentLocale, 'videoTranscriptionTab'),
+      href: "#", 
+      color: "orange",
+      disabled: true
     }
   ]
 
@@ -67,6 +72,20 @@ export function ToolNavigation({ activeTool }: ToolNavigationProps) {
               )
             }
 
+            if (tool.disabled) {
+              return (
+                <Button 
+                  key={tool.id}
+                  variant="outline" 
+                  className="w-full h-10 xs:h-12 text-sm xs:text-base font-medium break-words opacity-50 cursor-not-allowed"
+                  disabled
+                  onClick={(e) => e.preventDefault()}
+                >
+                  {tool.name}
+                </Button>
+              )
+            }
+
             return (
               <Link key={tool.id} href={tool.href} className="w-full">
                 <Button 
@@ -82,4 +101,4 @@ export function ToolNavigation({ activeTool }: ToolNavigationProps) {
       </div>
     </div>
   )
-} 
+}

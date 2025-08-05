@@ -11,8 +11,11 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Mail, MapPin, Clock, MessageSquare, Users, Headphones } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export default function ContactPage() {
+  const currentLocale = useLocale()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,8 +33,8 @@ export default function ContactPage() {
     // Simulate form submission
     setTimeout(() => {
       toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+        title: getTranslation(currentLocale, 'messageSentSuccess'),
+        description: getTranslation(currentLocale, 'responseTime'),
       })
       setFormData({
         name: "",
@@ -53,11 +56,10 @@ export default function ContactPage() {
       <section className="py-16 bg-gradient-to-br from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            Get in <span className="text-primary">Touch</span>
+            {getTranslation(currentLocale, 'getInTouch')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions, feedback, or need support? We'd love to hear from you. Our team is here to help you make the
-            most of VeO3 Prompt Generator and achieve your creative goals.
+            {getTranslation(currentLocale, 'contactPageSubtitle')}
           </p>
         </div>
       </section>
@@ -72,81 +74,81 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <MessageSquare className="h-5 w-5" />
-                      Send us a message
+                      {getTranslation(currentLocale, 'sendUsAMessage')}
                     </CardTitle>
                     <CardDescription>
-                      Fill out the form below and we'll get back to you as soon as possible.
+                      {getTranslation(currentLocale, 'contactFormDescription')}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="name">Full Name</Label>
+                          <Label htmlFor="name">{getTranslation(currentLocale, 'fullName')}</Label>
                           <Input
                             id="name"
                             value={formData.name}
                             onChange={(e) => handleChange("name", e.target.value)}
-                            placeholder="Your full name"
+                            placeholder={getTranslation(currentLocale, 'fullNamePlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="email">Email Address</Label>
+                          <Label htmlFor="email">{getTranslation(currentLocale, 'emailAddress')}</Label>
                           <Input
                             id="email"
                             type="email"
                             value={formData.email}
                             onChange={(e) => handleChange("email", e.target.value)}
-                            placeholder="your@email.com"
+                            placeholder={getTranslation(currentLocale, 'emailPlaceholder')}
                             required
                           />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="category">Category</Label>
+                        <Label htmlFor="category">{getTranslation(currentLocale, 'category')}</Label>
                         <Select value={formData.category} onValueChange={(value) => handleChange("category", value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a category" />
+                            <SelectValue placeholder={getTranslation(currentLocale, 'selectCategory')} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="general">General Inquiry</SelectItem>
-                            <SelectItem value="support">Technical Support</SelectItem>
-                            <SelectItem value="feature">Feature Request</SelectItem>
-                            <SelectItem value="bug">Bug Report</SelectItem>
-                            <SelectItem value="business">Business Inquiry</SelectItem>
-                            <SelectItem value="partnership">Partnership</SelectItem>
-                            <SelectItem value="media">Media & Press</SelectItem>
+                            <SelectItem value="general">{getTranslation(currentLocale, 'generalInquiry')}</SelectItem>
+                            <SelectItem value="support">{getTranslation(currentLocale, 'technicalSupport')}</SelectItem>
+                            <SelectItem value="feature">{getTranslation(currentLocale, 'featureRequest')}</SelectItem>
+                            <SelectItem value="bug">{getTranslation(currentLocale, 'bugReport')}</SelectItem>
+                            <SelectItem value="business">{getTranslation(currentLocale, 'businessInquiry')}</SelectItem>
+                            <SelectItem value="partnership">{getTranslation(currentLocale, 'partnership')}</SelectItem>
+                            <SelectItem value="media">{getTranslation(currentLocale, 'mediaPress')}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="subject">Subject</Label>
+                        <Label htmlFor="subject">{getTranslation(currentLocale, 'subject')}</Label>
                         <Input
                           id="subject"
                           value={formData.subject}
                           onChange={(e) => handleChange("subject", e.target.value)}
-                          placeholder="Brief description of your inquiry"
+                          placeholder={getTranslation(currentLocale, 'subjectPlaceholder')}
                           required
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message">Message</Label>
+                        <Label htmlFor="message">{getTranslation(currentLocale, 'message')}</Label>
                         <Textarea
                           id="message"
                           value={formData.message}
                           onChange={(e) => handleChange("message", e.target.value)}
-                          placeholder="Please provide details about your inquiry..."
+                          placeholder={getTranslation(currentLocale, 'messagePlaceholder')}
                           className="min-h-[120px]"
                           required
                         />
                       </div>
 
                       <Button type="submit" className="w-full" disabled={isSubmitting}>
-                        {isSubmitting ? "Sending..." : "Send Message"}
+                        {isSubmitting ? getTranslation(currentLocale, 'sending') : getTranslation(currentLocale, 'sendMessage')}
                       </Button>
                     </form>
                   </CardContent>
@@ -159,13 +161,13 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Mail className="h-5 w-5" />
-                      Email Support
+                      {getTranslation(currentLocale, 'emailSupport')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-2">For general inquiries and support</p>
+                    <p className="text-muted-foreground mb-2">{getTranslation(currentLocale, 'emailSupportDesc')}</p>
                     <p className="font-medium">support@veo3promgenerator.com</p>
-                    <p className="text-sm text-muted-foreground mt-2">We typically respond within 24 hours</p>
+                    <p className="text-sm text-muted-foreground mt-2">{getTranslation(currentLocale, 'emailResponseTime')}</p>
                   </CardContent>
                 </Card>
 
@@ -173,15 +175,15 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Headphones className="h-5 w-5" />
-                      Live Chat Support
+                      {getTranslation(currentLocale, 'liveChatSupport')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-2">Get instant help with our live chat</p>
+                    <p className="text-muted-foreground mb-2">{getTranslation(currentLocale, 'liveChatDesc')}</p>
                     <Button className="w-full bg-transparent" variant="outline">
-                      Start Live Chat
+                      {getTranslation(currentLocale, 'startLiveChat')}
                     </Button>
-                    <p className="text-sm text-muted-foreground mt-2">Available 9 AM - 6 PM PST, Mon-Fri</p>
+                    <p className="text-sm text-muted-foreground mt-2">{getTranslation(currentLocale, 'liveChatHours')}</p>
                   </CardContent>
                 </Card>
 
@@ -189,15 +191,15 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Users className="h-5 w-5" />
-                      Community Forum
+                      {getTranslation(currentLocale, 'communityForum')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-2">Connect with other users and get help</p>
+                    <p className="text-muted-foreground mb-2">{getTranslation(currentLocale, 'communityForumDesc')}</p>
                     <Button className="w-full bg-transparent" variant="outline">
-                      Visit Forum
+                      {getTranslation(currentLocale, 'visitForum')}
                     </Button>
-                    <p className="text-sm text-muted-foreground mt-2">24/7 community support</p>
+                    <p className="text-sm text-muted-foreground mt-2">{getTranslation(currentLocale, 'communitySupport')}</p>
                   </CardContent>
                 </Card>
 
@@ -205,22 +207,22 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Clock className="h-5 w-5" />
-                      Business Hours
+                      {getTranslation(currentLocale, 'businessHours')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span>Monday - Friday</span>
+                        <span>{getTranslation(currentLocale, 'mondayFriday')}</span>
                         <span>9:00 AM - 6:00 PM PST</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Saturday</span>
+                        <span>{getTranslation(currentLocale, 'saturday')}</span>
                         <span>10:00 AM - 4:00 PM PST</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Sunday</span>
-                        <span>Closed</span>
+                        <span>{getTranslation(currentLocale, 'sunday')}</span>
+                        <span>{getTranslation(currentLocale, 'closed')}</span>
                       </div>
                     </div>
                   </CardContent>
@@ -230,11 +232,11 @@ export default function ContactPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <MapPin className="h-5 w-5" />
-                      Office Location
+                      {getTranslation(currentLocale, 'officeLocation')}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-2">Visit us at our headquarters</p>
+                    <p className="text-muted-foreground mb-2">{getTranslation(currentLocale, 'visitOffice')}</p>
                     <address className="text-sm not-italic">
                       123 Innovation Drive
                       <br />
@@ -249,16 +251,16 @@ export default function ContactPage() {
 
             {/* FAQ Section */}
             <div className="mt-16 text-center">
-              <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'faqSectionTitle')}</h2>
               <p className="text-muted-foreground mb-8">
-                Check out our FAQ section for quick answers to common questions about VeO3 Prompt Generator.
+                {getTranslation(currentLocale, 'faqSectionDesc')}
               </p>
               <div className="flex justify-center gap-4">
                 <Button variant="outline" asChild>
-                  <a href="/faq">View FAQ</a>
+                  <a href="/faq">{getTranslation(currentLocale, 'viewFAQ')}</a>
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="/help">Help Center</a>
+                  <a href="/help">{getTranslation(currentLocale, 'helpCenter')}</a>
                 </Button>
               </div>
             </div>

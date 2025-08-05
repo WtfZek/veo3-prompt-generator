@@ -3,7 +3,7 @@ import Link from "next/link"
 const sitemapLinks = [
   { title: "Home", href: "/" },
   { title: "Tools", href: "/tools" },
-  { title: "Blog", href: "/blog" },
+  // { title: "Blog", href: "/blog" },
   { title: "About", href: "/about" },
   { title: "Contact", href: "/contact" },
   { title: "Prompt Guide", href: "/prompt-guide" },

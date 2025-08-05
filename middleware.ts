@@ -32,14 +32,14 @@ function getLocale(request: NextRequest): string | undefined {
   const preferredLocales = acceptLanguage.split(",").map((lang) => lang.split(";")[0].trim().toLowerCase())
 
   for (const preferredLocale of preferredLocales) {
-    // Check for exact match
-    if (locales.includes(preferredLocale as any)) {
+    // Check for exact match (but skip Chinese for now to avoid auto-redirect)
+    if (locales.includes(preferredLocale as any) && preferredLocale !== 'zh') {
       return preferredLocale
     }
 
-    // Check for language match (e.g., 'fr-FR' -> 'fr')
+    // Check for language match (e.g., 'fr-FR' -> 'fr', but skip zh-CN -> zh)
     const language = preferredLocale.split("-")[0]
-    if (locales.includes(language as any)) {
+    if (locales.includes(language as any) && language !== 'zh') {
       return language
     }
   }
