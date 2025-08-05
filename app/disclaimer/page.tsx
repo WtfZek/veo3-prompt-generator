@@ -110,9 +110,9 @@ export default function DisclaimerPage() {
                 <h2 className="text-2xl font-bold mb-4">{getTranslation(currentLocale, 'contactInformation')}</h2>
                 <p className="text-muted-foreground mb-4">{getTranslation(currentLocale, 'contactInformationDesc')}</p>
                 <div className="bg-muted rounded-lg p-4">
-                  <p className="font-medium">{getTranslation(currentLocale, 'email')}: legal@veo3promgenerator.com</p>
-                  <p className="font-medium">{getTranslation(currentLocale, 'address')}: 123 Innovation Drive, San Francisco, CA 94105</p>
-                  <p className="font-medium">{getTranslation(currentLocale, 'phone')}: +1 (555) 123-4567</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'email')}: 804301756@qq.com</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'address')}: 湖北省武汉市青山区招商时代总部 B 栋 - 2105</p>
+                  <p className="font-medium">{getTranslation(currentLocale, 'phone')}: (+86)177-4053-4977</p>
                 </div>
               </section>
 

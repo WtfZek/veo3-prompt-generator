@@ -13,27 +13,27 @@ interface LocalePageProps {
 export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
   const locale = params.locale as Locale
 
-  if (locale === "fr") {
-    return {
-      title: "Générateur de Prompts Veo3 Gratuit en Ligne",
-      description:
-        "Transformez vos images et vidéos en prompts IA puissants avec notre technologie Gemini 2.5 Pro avancée.",
-      alternates: {
-        canonical: "/fr",
-        languages: {
-          en: "/",
-          fr: "/fr",
-          zh: "/zh",
-        },
-      },
-      openGraph: {
-        title: "Générateur de Prompts Veo3 Gratuit en Ligne",
-        description:
-          "Transformez vos images et vidéos en prompts IA puissants avec notre technologie Gemini 2.5 Pro avancée.",
-        locale: "fr_FR",
-      },
-    }
-  }
+  // if (locale === "fr") {
+  //   return {
+  //     title: "Générateur de Prompts Veo3 Gratuit en Ligne",
+  //     description:
+  //       "Transformez vos images et vidéos en prompts IA puissants avec notre technologie Gemini 2.5 Pro avancée.",
+  //     alternates: {
+  //       canonical: "/fr",
+  //       languages: {
+  //         en: "/",
+  //         fr: "/fr",
+  //         zh: "/zh",
+  //       },
+  //     },
+  //     openGraph: {
+  //       title: "Générateur de Prompts Veo3 Gratuit en Ligne",
+  //       description:
+  //         "Transformez vos images et vidéos en prompts IA puissants avec notre technologie Gemini 2.5 Pro avancée.",
+  //       locale: "fr_FR",
+  //     },
+  //   }
+  // }
 
   if (locale === "zh") {
     return {
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
 
 export function generateStaticParams() {
   return locales
-    .filter((locale) => locale !== "en")
+    .filter((locale) => locale !== "zh")
     .map((locale) => ({
       locale: locale,
     }))

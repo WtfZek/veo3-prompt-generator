@@ -3,48 +3,20 @@ import type { NextRequest } from "next/server"
 import { locales, defaultLocale } from "./lib/i18n"
 
 export function middleware(request: NextRequest) {
-  // Check if there is any supported locale in the pathname
   const pathname = request.nextUrl.pathname
-  const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
-  )
+  const segments = pathname.split('/').filter(Boolean)
+  const firstSegment = segments[0]
 
-  // Redirect if there is no locale
-  if (pathnameIsMissingLocale) {
-    // Get locale from Accept-Language header or use default
-    const locale = getLocale(request) || defaultLocale
-
-    // Don't redirect for default locale (English)
-    if (locale === defaultLocale) {
-      return NextResponse.next()
-    }
-
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
-  }
-}
-
-function getLocale(request: NextRequest): string | undefined {
-  // Get locale from Accept-Language header
-  const acceptLanguage = request.headers.get("accept-language")
-  if (!acceptLanguage) return undefined
-
-  // Simple locale detection - you might want to use a library like @formatjs/intl-locale
-  const preferredLocales = acceptLanguage.split(",").map((lang) => lang.split(";")[0].trim().toLowerCase())
-
-  for (const preferredLocale of preferredLocales) {
-    // Check for exact match (but skip Chinese for now to avoid auto-redirect)
-    if (locales.includes(preferredLocale as any) && preferredLocale !== 'zh') {
-      return preferredLocale
-    }
-
-    // Check for language match (e.g., 'fr-FR' -> 'fr', but skip zh-CN -> zh)
-    const language = preferredLocale.split("-")[0]
-    if (locales.includes(language as any) && language !== 'zh') {
-      return language
-    }
+  // 如果路径以语言前缀开头，重写到实际路径
+  if (locales.includes(firstSegment as any) && firstSegment !== defaultLocale) {
+    const actualPath = '/' + segments.slice(1).join('/')
+    const url = request.nextUrl.clone()
+    url.pathname = actualPath || '/'
+    return NextResponse.rewrite(url)
   }
 
-  return undefined
+  // 对于默认语言路径，直接通过
+  return NextResponse.next()
 }
 
 export const config = {

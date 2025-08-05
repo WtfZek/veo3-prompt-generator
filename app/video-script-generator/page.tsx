@@ -23,7 +23,7 @@ export default function VideoScriptGeneratorPage() {
     audience: "",
     scriptLength: "",
     scriptStyle: "",
-    language: "english",
+    language: "chinese",
   })
 
   const generateScript = async () => {
@@ -72,7 +72,7 @@ export default function VideoScriptGeneratorPage() {
       audience: "",
       scriptLength: "",
       scriptStyle: "",
-      language: "english",
+      language: "chinese",
     })
     setGeneratedScript("")
   }

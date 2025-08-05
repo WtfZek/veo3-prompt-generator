@@ -19,7 +19,7 @@ export function VideoScriptGenerator({ locale }: VideoScriptGeneratorProps) {
     audience: "",
     scriptLength: "",
     scriptStyle: "",
-    language: "vietnamese",
+    language: "chinese",
   })
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedScript, setGeneratedScript] = useState("")
@@ -52,11 +52,12 @@ export function VideoScriptGenerator({ locale }: VideoScriptGeneratorProps) {
   ]
 
   const languages = [
-    { value: "vietnamese", label: getTranslation(locale, "vietnamese") },
+    { value: "chinese", label: getTranslation(locale, "chinese") },
     { value: "english", label: getTranslation(locale, "english") },
     { value: "french", label: getTranslation(locale, "french") },
     { value: "spanish", label: getTranslation(locale, "spanish") },
     { value: "german", label: getTranslation(locale, "german") },
+    { value: "vietnamese", label: getTranslation(locale, "vietnamese") },
   ]
 
   const generateScript = async () => {

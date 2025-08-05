@@ -1,5 +1,5 @@
-export const defaultLocale = "en"
-export const locales = ["en", "fr", "zh"] as const
+export const defaultLocale = "zh"
+export const locales = ["zh", "en"/* , "fr" */] as const
 export type Locale = (typeof locales)[number]
 
 export const translations = {
@@ -40,6 +40,7 @@ export const translations = {
     scriptStyle: "Script Style",
     selectStyle: "Select style",
     language: "Language",
+    chinese: "Chinese",
     vietnamese: "Vietnamese",
     english: "English",
     french: "French",
@@ -643,268 +644,142 @@ export const translations = {
     // FAQ Section Title
     veo3FaqTitle: "Frequently Asked Questions",
 
+    // Prompt Library Page
+    promptLibraryTitle: "Prompt Library",
+    promptLibrarySubtitle: "Discover professionally crafted prompts for various video styles and use cases.",
+    cinematicPortrait: "Cinematic Portrait",
+    natureLandscape: "Nature Landscape",
+    productShowcase: "Product Showcase",
+    urbanStreetScene: "Urban Street Scene",
+    portrait: "Portrait",
+    nature: "Nature",
+    // commercial: "Commercial",
+    urban: "Urban",
+    landscape: "Landscape",
+    goldenHour: "Golden Hour",
+    product: "Product",
+    clean: "Clean",
+    street: "Street",
+    // documentary: "Documentary",
+    copy: "Copy",
+    createYourOwnPrompts: "Create Your Own Prompts",
+    createYourOwnPromptsDesc: "Use our AI-powered generator to create custom prompts tailored to your specific needs.",
+    generateCustomPrompts: "Generate Custom Prompts",
+
+    // Privacy Policy Page
+    privacyPolicyTitle: "Privacy Policy",
+    privacyPolicySubtitle: "Last updated:",
+    privacyPolicyLastUpdated: "Last updated: December 2024",
+    privacyIntroduction: "Introduction",
+    privacyIntroductionTitle: "Introduction",
+    privacyIntroductionText: "At VeO3 Prompt Generator, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.",
+    privacyIntroductionDesc: "At VeO3 Prompt Generator, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and protect your information when you use our AI-powered video prompt generation services.",
+    
+    informationWeCollect: "Information We Collect",
+    privacyPersonalInfoTitle: "Personal Information",
+    privacyPersonalInfoDesc: "We may collect personal information that you voluntarily provide to us when you:",
+    personalInformation: "Personal Information",
+    personalInformationText: "We may collect personal information that you voluntarily provide to us when you:",
+    personalInfoItem1: "Create an account on our platform",
+    personalInfoItem2: "Contact us for support or inquiries",
+    personalInfoItem3: "Subscribe to our newsletter or updates",
+    personalInfoItem4: "Participate in surveys, contests, or promotions",
+    personalInfoItem5: "Use our AI-powered tools and services",
+    privacyPersonalInfoItem1: "Video files and media content you upload for analysis",
+    privacyPersonalInfoItem2: "Text inputs and preferences you provide in forms",
+    privacyPersonalInfoItem3: "Usage data, including how you interact with our services",
+    privacyPersonalInfoItem4: "Technical information such as IP address, browser type, and device information",
+    privacyPersonalInfoItem5: "Information collected through cookies and similar technologies",
+    
+    usageInformation: "Usage Information",
+    privacyUsageInfoTitle: "Usage Information",
+    privacyUsageInfoDesc: "We automatically collect certain information when you visit our website, including:",
+    usageInformationText: "We automatically collect certain information when you visit our website, including:",
+    usageInfoItem1: "IP address and browser information",
+    usageInfoItem2: "Pages visited and time spent on our site",
+    usageInfoItem3: "Device information and operating system",
+    usageInfoItem4: "Referral sources and search terms",
+    usageInfoItem5: "Interaction data with our tools and features",
+    privacyUsageInfoItem1: "IP address and browser information",
+    privacyUsageInfoItem2: "Pages visited and time spent on our site",
+    privacyUsageInfoItem3: "Device information and operating system",
+    privacyUsageInfoItem4: "Referral sources and search terms",
+    privacyUsageInfoItem5: "Interaction data with our tools and features",
+    
+    contentAndMedia: "Content and Media",
+    privacyContentMediaTitle: "Content and Media",
+    privacyContentMediaDesc: "When you upload videos, images, or other content to our service, we temporarily process this content to generate prompts and provide our services. All uploaded files are automatically deleted from our servers immediately after processing is complete, typically within minutes.",
+    contentAndMediaText: "When you upload videos, images, or other content to our service, we temporarily process this content to generate prompts and provide our services. All uploaded files are automatically deleted from our servers immediately after processing is complete, typically within minutes.",
+    
+    howWeUseInformation: "How We Use Your Information",
+    howWeUseInformationText: "We use the information we collect for various purposes, including:",
+    useInfoItem1: "Providing and maintaining our AI-powered services",
+    useInfoItem2: "Processing your requests and generating prompts",
+    useInfoItem3: "Sending you technical notices and support messages",
+    useInfoItem4: "Responding to your comments, questions, and requests",
+    useInfoItem5: "Improving our website, tools, and user experience",
+    useInfoItem6: "Analyzing usage patterns and service performance",
+    useInfoItem7: "Detecting and preventing fraud, abuse, or security issues",
+    useInfoItem8: "Complying with legal obligations and protecting our rights",
+    privacyInfoUseItem1: "Process your video content and generate AI prompts",
+    privacyInfoUseItem2: "Provide and improve our services",
+    privacyInfoUseItem3: "Analyze usage patterns to enhance user experience",
+    privacyInfoUseItem4: "Communicate with you about service updates and support",
+    privacyInfoUseItem5: "Ensure the security and integrity of our platform",
+    privacyInfoUseItem6: "Analyzing usage patterns and service performance",
+    privacyInfoUseItem7: "Detecting and preventing fraud, abuse, or security issues",
+    privacyInfoUseItem8: "Complying with legal obligations and protecting our rights",
+    
+    dataSecurity: "Data Security",
+    dataSecurityText: "We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. These measures include encryption, secure data transmission, access controls, and regular security audits. However, please note that no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.",
+    
+    dataRetention: "Data Retention",
+    dataRetentionText: "We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy. Uploaded media files are deleted immediately after processing. Account information is retained until you request deletion or close your account. Usage data may be retained for analytical purposes in anonymized form.",
+    
+    thirdPartyServices: "Third-Party Services",
+    thirdPartyServicesText: "Our website may contain links to third-party websites or services, and we may use third-party services for analytics, payment processing, or other functions. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies before providing any personal information.",
+    
+    yourRights: "Your Rights",
+    yourRightsText: "Depending on your location, you may have certain rights regarding your personal information:",
+    rightsItem1: "Right to access your personal information",
+    rightsItem2: "Right to correct inaccurate information",
+    rightsItem3: "Right to delete your personal information",
+    rightsItem4: "Right to restrict processing",
+    rightsItem5: "Right to data portability",
+    rightsItem6: "Right to object to processing",
+    rightsItem7: "Right to withdraw consent",
+    privacyUserRightsItem1: "Access information we hold about you",
+    privacyUserRightsItem2: "Request correction of inaccurate information",
+    privacyUserRightsItem3: "Request deletion of your personal data",
+    privacyUserRightsItem4: "Object to processing of your information",
+    privacyUserRightsItem5: "Data portability (where applicable)",
+    privacyUserRightsItem6: "Right to object to processing",
+    privacyUserRightsItem7: "Right to withdraw consent",
+    
+    internationalDataTransfers: "International Data Transfers",
+    internationalDataTransfersText: "Your information may be transferred to and processed in countries other than your own. We ensure that such transfers comply with applicable data protection laws and implement appropriate safeguards to protect your information.",
+    
+    changesToPolicy: "Changes to This Policy",
+    changesToPolicyText: "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date. We encourage you to review this Privacy Policy periodically for any changes.",
+    
+    contactUs: "Contact Us",
+    contactUsText: "If you have any questions about this Privacy Policy or our data practices, please contact us at:",
+    contactEmail: "Email: privacy@veo3promgenerator.com",
+    contactAddress: "Address: 123 Innovation Drive, San Francisco, CA 94105",
+    contactPhone: "Phone: +1 (555) 123-4567",
+
     // Common
     loading: "Loading...",
-    error: "Error occurred",
+    error: "An error occurred",
     success: "Success",
     required: "required",
     optional: "optional",
   },
-  fr: {
-    // SEO and Branding
-    siteTitle: "Générateur de Prompts Veo3 Gratuit en Ligne",
-    mainHeading: "Générateur de Prompts Veo3",
-    accentWord: "Prompts",
-
-    // Navigation
-    home: "Accueil",
-    tools: "Outils",
-    blog: "Blog",
-    about: "À propos",
-    contact: "Contact",
-    getStarted: "Commencer",
-
-    // Main Tools Navigation
-    videoScriptGenerator: "Générateur de Script Vidéo",
-    veo3PromptGenerator: "Générateur de Prompts Veo3",
-
-    // Video Script Generator
-    videoTopic: "Sujet vidéo et personnages principaux (Décrire en 1-2 phrases)",
-    videoTopicPlaceholder:
-      "Exemple: Nouvelle publicité produit, introduction produit, guide d'utilisation produit,...\nPersonnages: Exemple: Bébé Bi, M. A, Mme B,...",
-    audience: "Qui est votre audience?",
-    selectAudience: "Sélectionner l'audience",
-    scriptLength: "Longueur du script",
-    selectLength: "Sélectionner la longueur",
-    scriptStyle: "Style du script",
-    selectStyle: "Sélectionner le style",
-    language: "Langue",
-    vietnamese: "Vietnamien",
-    english: "Anglais",
-    french: "Français",
-    spanish: "Espagnol",
-    german: "Allemand",
-    generator: "Générateur",
-
-    // Video Script Generator - Extended
-    videoScriptGeneratorTitle: "Générateur de Script Vidéo",
-    videoScriptGeneratorSubtitle: "Créez des scripts vidéo convaincants avec notre générateur alimenté par l'IA. Parfait pour les créateurs de contenu YouTube, TikTok, Instagram et réseaux sociaux.",
-    videoScriptGeneratorFreeOnline: "Gratuit en Ligne",
-    
-    // Form Labels and Placeholders
-    videoTopicAndCharacters: "Sujet Vidéo et Personnages Principaux:",
-    videoTopicExample: "Exemple: Un court métrage sur un robot solitaire qui trouve une fleur, mettant en scène un robot curieux et une fleur vibrante et lumineuse.",
-    
-    // Buttons and Actions
-    generateScript: "Générer le Script",
-    generatingScript: "Génération du Script...",
-    clearForm: "Effacer",
-    copyScript: "Copier le Script",
-    newScript: "Nouveau Script",
-    
-    // Messages
-    missingInformation: "Informations Manquantes",
-    missingInformationDesc: "Veuillez remplir tous les champs requis.",
-    scriptGeneratedSuccessfully: "Script généré avec succès!",
-    scriptGeneratedDesc: "Votre script vidéo est prêt.",
-    generationFailed: "Échec de la génération",
-    generationFailedDesc: "Échec de la génération du script. Veuillez réessayer.",
-    
-    // Output
-    generatedScriptTitle: "Script Généré:",
-    
-    // How It Works Section
-    howVideoScriptGeneratorWorks: "Comment Fonctionne le Générateur de Script Vidéo",
-    scriptStep1Title: "Décrivez Votre Vidéo",
-    scriptStep1Desc: "Entrez le sujet de votre vidéo et décrivez les personnages principaux ou éléments que vous voulez inclure dans votre script.",
-    scriptStep2Title: "Génération IA",
-    scriptStep2Desc: "Notre IA avancée analyse votre saisie et génère un script vidéo professionnel avec une structure et un flux appropriés.",
-    scriptStep3Title: "Télécharger et Utiliser",
-    scriptStep3Desc: "Copiez le script généré et utilisez-le pour votre production vidéo, avec des descriptions de scènes claires et des dialogues.",
-    
-    // About Section
-    aboutVideoScriptGenerator: "À Propos du Générateur de Script Vidéo",
-    aboutVideoScriptGeneratorDesc: "Notre Générateur de Script Vidéo est un outil puissant alimenté par l'IA conçu pour aider les créateurs de contenu, cinéastes et producteurs vidéo à créer des scripts convaincants rapidement et efficacement. En décrivant simplement votre concept vidéo et personnages principaux, notre IA avancée génère des scripts de qualité professionnelle qui incluent des descriptions de scènes, dialogues de personnages et flux narratif. Cet outil est parfait pour les créateurs YouTube, influenceurs des réseaux sociaux, équipes marketing et quiconque a besoin de produire du contenu vidéo engageant avec un script clair et structuré.",
-    
-    // FAQ Section
-    videoScriptFaqTitle: "Questions Fréquemment Posées",
-    faqVideoTypesQuestion: "Quels types de vidéos puis-je créer des scripts?",
-    faqVideoTypesAnswer: "Notre Générateur de Script Vidéo peut créer des scripts pour divers types de vidéos incluant les vidéos YouTube, contenu TikTok, Instagram Reels, vidéos éducatives, contenu promotionnel, vidéos narratives, et plus. Décrivez simplement votre concept et l'IA adaptera le script en conséquence.",
-    faqScriptLengthQuestion: "Quelle est la longueur des scripts générés?",
-    faqScriptLengthAnswer: "La longueur du script varie selon votre saisie et exigences. Vous pouvez spécifier si vous avez besoin d'un script court de 30 secondes ou d'un script vidéo plus long de 5-10 minutes. L'IA ajustera le contenu et le niveau de détail en conséquence.",
-    faqEditScriptQuestion: "Puis-je modifier le script généré?",
-    faqEditScriptAnswer: "Absolument! Le script généré est un point de départ que vous pouvez copier, modifier et personnaliser pour correspondre à vos besoins spécifiques, style et voix de marque. N'hésitez pas à modifier les dialogues, ajouter des détails ou ajuster la structure.",
-    faqCommercialUseQuestion: "Le script convient-il à un usage commercial?",
-    faqCommercialUseAnswer: "Oui, les scripts générés par notre outil sont libres d'utilisation pour les projets personnels et commerciaux. Cependant, nous recommandons de réviser et personnaliser le contenu pour s'assurer qu'il s'aligne avec vos directives de marque et exigences légales.",
-
-    // Video to Prompt Generator - Extended
-    videoToPromptGeneratorTitle: "Générateur Vidéo vers Prompt",
-    videoToPromptGeneratorSubtitle: "Transformez vos vidéos existantes en prompts IA détaillés. Téléchargez une vidéo et obtenez des prompts complets pour les plateformes de génération vidéo IA.",
-    videoToPromptFreeOnline: "Gratuit en Ligne",
-    
-    // Upload Section
-    uploadVideo: "Télécharger Vidéo:",
-    dragDropVideo: "Glissez-déposez un fichier vidéo ici, ou cliquez pour sélectionner",
-    dropVideoHere: "Déposez la vidéo ici...",
-    supportedFormats: "Supporte MP4, MOV, AVI (Max 100MB)",
-    
-    // Messages
-    videoUploadedSuccessfully: "Vidéo téléchargée avec succès!",
-    videoUploadedDesc: "a été téléchargée.",
-    invalidFileType: "Type de fichier invalide",
-    invalidFileTypeDesc: "Veuillez télécharger un fichier vidéo.",
-    noVideoUploaded: "Aucune vidéo téléchargée",
-    noVideoUploadedDesc: "Veuillez d'abord télécharger un fichier vidéo.",
-    promptGeneratedSuccessfully: "Prompt généré avec succès!",
-    promptGeneratedDesc: "Votre prompt vidéo est prêt.",
-    
-    // Buttons and Actions
-    analyzingVideo: "Analyse de la Vidéo...",
-    generatePrompt: "Générer le Prompt",
-    clearAll: "Effacer Tout",
-    
-    // Output
-    generatedPromptTitle: "Prompt Généré:",
-    
-    // How It Works Section
-    howVideoToPromptWorks: "Comment Fonctionne le Générateur Vidéo vers Prompt",
-    videoPromptStep1Title: "Téléchargez Votre Vidéo",
-    videoPromptStep1Desc: "Téléchargez n'importe quel fichier vidéo (MP4, MOV, AVI) jusqu'à 100MB. Notre système analysera le contenu visuel.",
-    videoPromptStep2Title: "Analyse IA",
-    videoPromptStep2Desc: "Notre IA avancée extrait les éléments visuels clés, scènes, objets et actions de votre vidéo.",
-    videoPromptStep3Title: "Générer le Prompt",
-    videoPromptStep3Desc: "Obtenez un prompt complet qui peut être utilisé pour générer du contenu vidéo similaire ou amélioré avec les plateformes IA.",
-    
-    // About Section
-    aboutVideoToPromptGenerator: "À Propos du Générateur Vidéo vers Prompt",
-    aboutVideoToPromptGeneratorDesc: "Notre Générateur Vidéo vers Prompt est un outil innovant alimenté par l'IA qui transforme vos vidéos existantes en prompts détaillés pour les plateformes de génération vidéo IA. En analysant le contenu de votre vidéo, notre IA avancée extrait les éléments visuels clés, scènes, objets et actions pour créer des prompts complets qui peuvent être utilisés pour générer du contenu vidéo similaire ou amélioré. Cet outil est parfait pour les créateurs de contenu, marketeurs et producteurs vidéo qui veulent exploiter leur contenu existant pour créer de nouvelles vidéos générées par IA avec un style et un message cohérents.",
-    
-    // FAQ Section
-    videoToPromptFaqTitle: "Questions Fréquemment Posées",
-    faqVideoFormatsQuestion: "Quels formats vidéo sont supportés?",
-    faqVideoFormatsAnswer: "Nous supportons la plupart des formats vidéo courants incluant MP4, MOV, AVI, et plus. La taille maximale de fichier est de 100MB pour assurer un traitement et une analyse rapides.",
-    faqPromptAccuracyQuestion: "Quelle est la précision des prompts générés?",
-    faqPromptAccuracyAnswer: "Notre IA fournit une analyse très précise des éléments visuels, scènes et actions. Les prompts générés capturent l'essence et les composants clés de votre vidéo originale pour une génération vidéo IA efficace.",
-    faqAIPlatformCompatibilityQuestion: "Puis-je utiliser les prompts avec n'importe quelle plateforme vidéo IA?",
-    faqAIPlatformCompatibilityAnswer: "Oui! Les prompts générés sont conçus pour être compatibles avec la plupart des plateformes de génération vidéo IA incluant Runway, Pika Labs, Veo3, et autres. Vous pouvez modifier les prompts selon les besoins pour des plateformes spécifiques.",
-    faqVideoSecurityQuestion: "Mon contenu vidéo est-il sécurisé?",
-    faqVideoSecurityAnswer: "Absolument. Nous priorisons votre confidentialité et sécurité. Les vidéos sont traitées de manière sécurisée et ne sont pas stockées de façon permanente. Nous analysons seulement le contenu pour générer des prompts et ne conservons pas vos fichiers vidéo.",
-
-    // Veo3 Prompt Generator - Structured Mode
-    structuredMode: "Mode Structuré",
-    chatMode: "Mode Chat",
-    mainSubject: "Décrivez le sujet principal de la vidéo en détail?",
-    mainSubjectPlaceholder: "Décrivez l'apparence du sujet principal",
-    mainSubjectRequired: "Ce champ est requis",
-    sceneAction: "Que se passe-t-il dans la scène?",
-    sceneActionPlaceholder: "Que fait ou ressent le sujet dans la scène?",
-    sceneActionRequired: "Ce champ est requis",
-    dialogue: "Y a-t-il un dialogue ou un son spécifique que vous voulez dans la vidéo?",
-    dialogueOptional: "(optionnel)",
-    dialoguePlaceholder: "Ajoutez du dialogue, de la musique ou des effets sonores si nécessaire.",
-    cameraMovement: "Comment la caméra doit-elle bouger ou cadrer la prise?",
-    cameraOptional: "(optionnel)",
-    cameraPlaceholder: "Vous pouvez décrire des choses comme zoom lent, vue aérienne, gros plan, plan de suivi, etc.",
-    otherDetails: "D'autres détails que vous voulez inclure?",
-    otherDetailsOptional: "(optionnel)",
-    otherDetailsPlaceholder:
-      "Cela pourrait être l'éclairage, la météo, les objets, l'ambiance, ou de petites touches dans l'environnement",
-    subtitles: "Voulez-vous des sous-titres dans la vidéo?",
-    subtitlesOptional: "(optionnel)",
-    yes: "Oui",
-    no: "Non",
-    generate: "Générer",
-
-    // Chat Mode
-    chatPrompt:
-      "Veuillez décrire votre idée clairement, spécifier les dimensions vidéo requises, et définir précisément votre audience cible. Exemple: Un astronaute embarquant dans une mission d'exploration vers la lune, vidéo verticale pour TikTok ciblant les passionnés d'espace et de corps célestes",
-    chatPlaceholder: "Décrivez la vidéo que vous voulez créer...",
-    generateVideoPrompt: "Générer un Prompt Vidéo",
-
-    // Audiences
-    generalAudience: "Audience Générale",
-    teenagers: "Adolescents (13-19)",
-    youngAdults: "Jeunes Adultes (20-35)",
-    professionals: "Professionnels",
-    parents: "Parents",
-    seniors: "Seniors (55+)",
-
-    // Script Lengths
-    length15to30: "15-30 secondes",
-    length30to60: "30-60 secondes",
-    length1to2min: "1-2 minutes",
-    length2to5min: "2-5 minutes",
-    length5to10min: "5-10 minutes",
-
-    // Script Styles
-    conversational: "Conversationnel",
-    professional: "Professionnel",
-    energetic: "Énergique",
-    educational: "Éducatif",
-    storytelling: "Narratif",
-    promotional: "Promotionnel",
-
-    // Footer
-    footerDescription:
-      "Transformez vos idées en prompts vidéo puissants avec une technologie IA de pointe. Notre plateforme combine l'ingénierie de prompts avancée avec un design intuitif pour aider les créateurs de contenu, les marketeurs et les entreprises à générer des scripts vidéo convaincants et des prompts détaillés pour les outils de génération vidéo IA comme Veo 3 de Google.",
-    
-    // Footer Sections
-    coreTools: "Outils Principaux",
-    // tools: "Outils",
-    company: "Entreprise",
-    legal: "Légal",
-    
-    // Footer Links
-    videoScriptGeneratorFooter: "Générateur de Script Vidéo",
-    veo3PromptGeneratorFooter: "Générateur de Prompt Veo3",
-    videoToPromptFooter: "Vidéo vers Prompt",
-    videoTranscriptionFooter: "Transcription Vidéo",
-    promptGuideFooter: "Guide des Prompts",
-    promptLibraryFooter: "Bibliothèque de Prompts",
-    aboutFooter: "À Propos",
-    contactFooter: "Contact",
-    blogFooter: "Blog",
-    communityFooter: "Communauté",
-    privacyPolicyFooter: "Politique de Confidentialité",
-    termsOfServiceFooter: "Conditions d'Utilisation",
-    disclaimerFooter: "Avertissement",
-    sitemapFooter: "Plan du Site",
-    
-    // Footer Copyright
-    allRightsReserved: "Tous droits réservés.",
-
-    // Tools Pages
-    videoToPrompt: "Vidéo vers Prompt",
-    transcription: "Transcription",
-    promptGuide: "Guide des Prompts",
-    promptLibrary: "Bibliothèque de Prompts",
-
-    // Hero Section
-    aiPoweredBadge: "🚀 Génération de Contenu IA",
-    heroFree: "Gratuit",
-
-    // Feature Cards
-    lightningFast: "Ultra Rapide",
-    lightningFastDesc: "Obtenez des résultats en secondes avec des algorithmes IA optimisés",
-    securePrivate: "Sécurisé et Privé",
-    securePrivateDesc: "Sécurité de niveau entreprise avec suppression automatique des fichiers",
-    advancedAI: "IA Avancée",
-    advancedAIDesc: "Alimenté par Gemini 2.5 Pro avec basculement intelligent",
-    multiFormat: "Multi-Format",
-    multiFormatDesc: "Support pour les images, vidéos et fichiers audio",
-
-    // Common
-    loading: "Chargement...",
-    error: "Erreur survenue",
-    success: "Succès",
-    required: "requis",
-    optional: "optionnel",
-  },
   zh: {
     // SEO and Branding
-    siteTitle: "Veo3提示词生成器免费在线版",
-    mainHeading: "Veo3提示词生成器",
-    accentWord: "提示词",
+    siteTitle: "Veo3 提示词生成器免费在线版",
+    mainHeading: "Veo3 提示词生成器",
+    accentWord: "",
 
     // Navigation
     home: "首页",
@@ -937,6 +812,7 @@ export const translations = {
     scriptStyle: "脚本风格",
     selectStyle: "选择风格",
     language: "语言",
+    chinese: "中文",
     vietnamese: "越南语",
     english: "英语",
     french: "法语",
@@ -1476,11 +1352,11 @@ export const translations = {
     additionalDetailsPlaceholder: "任何其他具体细节、情绪、氛围或技术要求...",
     
     // Video Style Options
-    cinematic: "电影风格",
+    cinematic: "电影",
     documentary: "纪录片",
-    commercial: "商业广告",
+    commercial: "商业",
     educationalStyle: "教育性",
-    artistic: "艺术风格",
+    artistic: "艺术",
     minimalist: "极简主义",
     
     // Loading Messages
@@ -1541,12 +1417,396 @@ export const translations = {
     // FAQ Section Title
     veo3FaqTitle: "常见问题",
 
+    // Prompt Library Page
+    promptLibraryTitle: "提示词库",
+    promptLibrarySubtitle: "发现各种视频风格和用例的专业制作提示词。",
+    cinematicPortrait: "电影肖像",
+    natureLandscape: "自然风景",
+    productShowcase: "产品展示",
+    urbanStreetScene: "城市街景",
+    portrait: "肖像",
+    nature: "自然",
+    // commercial: "商业",
+    urban: "城市",
+    landscape: "风景",
+    goldenHour: "金色时光",
+    product: "产品",
+    clean: "简洁",
+    street: "街道",
+    // documentary: "纪录片",
+    copy: "复制",
+    createYourOwnPrompts: "创建您自己的提示词",
+    createYourOwnPromptsDesc: "使用我们的AI驱动生成器创建针对您特定需求的自定义提示词。",
+    generateCustomPrompts: "生成自定义提示词",
+
     // Common
     loading: "加载中...",
     error: "发生错误",
     success: "成功",
     required: "必填",
     optional: "可选",
+
+    // Privacy Policy Page
+    privacyPolicyTitle: "隐私政策",
+    privacyPolicyLastUpdated: "最后更新：2025 年 8 月",
+    privacyIntroductionTitle: "引言",
+    privacyIntroductionDesc: "在VeO3提示词生成器，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策解释了我们如何收集、使用和保护您在使用我们的AI驱动视频提示词生成服务时的信息。",
+    privacyPolicyIntro: "在VeO3提示词生成器，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策解释了我们如何收集、使用和保护您在使用我们的AI驱动视频提示词生成服务时的信息。",
+    
+    privacyInfoCollectionTitle: "我们收集的信息",
+    privacyInfoCollectionDesc: "我们收集以下类型的信息：",
+    privacyPersonalInfoTitle: "个人信息",
+    privacyPersonalInfoDesc: "我们可能收集您主动提供给我们的个人信息，当您：",
+    privacyPersonalInfoItem1: "您上传用于分析的视频文件和媒体内容",
+    privacyPersonalInfoItem2: "您在表单中提供的文本输入和偏好设置",
+    privacyPersonalInfoItem3: "使用数据，包括您如何与我们的服务互动",
+    privacyPersonalInfoItem4: "技术信息，如IP地址、浏览器类型和设备信息",
+    privacyPersonalInfoItem5: "Cookies和类似技术收集的信息",
+    privacyInfoCollectionItem1: "您上传用于分析的视频文件和媒体内容",
+    privacyInfoCollectionItem2: "您在表单中提供的文本输入和偏好设置",
+    privacyInfoCollectionItem3: "使用数据，包括您如何与我们的服务互动",
+    privacyInfoCollectionItem4: "技术信息，如IP地址、浏览器类型和设备信息",
+    privacyInfoCollectionItem5: "Cookies和类似技术收集的信息",
+    
+    privacyUsageInfoTitle: "使用信息",
+    privacyUsageInfoDesc: "当您访问我们的网站时，我们会自动收集某些信息，包括：",
+    privacyUsageInfoItem1: "IP地址和浏览器信息",
+    privacyUsageInfoItem2: "访问的页面和在我们网站上花费的时间",
+    privacyUsageInfoItem3: "设备信息和操作系统",
+    privacyUsageInfoItem4: "推荐来源和搜索词",
+    privacyUsageInfoItem5: "与我们工具和功能的交互数据",
+    
+    privacyContentMediaTitle: "内容和媒体",
+    privacyContentMediaDesc: "当您向我们的服务上传视频、图像或其他内容时，我们会临时处理这些内容以生成提示词并提供我们的服务。所有上传的文件在处理完成后会立即从我们的服务器中自动删除，通常在几分钟内完成。",
+    
+    privacyInfoUseTitle: "我们如何使用您的信息",
+    privacyInfoUseDesc: "我们使用收集的信息来：",
+    privacyInfoUseItem1: "处理您的视频内容并生成AI提示词",
+    privacyInfoUseItem2: "提供和改进我们的服务",
+    privacyInfoUseItem3: "分析使用模式以增强用户体验",
+    privacyInfoUseItem4: "与您就服务更新和支持进行沟通",
+    privacyInfoUseItem5: "确保我们平台的安全性和完整性",
+    privacyInfoUseItem6: "分析使用模式和性能",
+    privacyInfoUseItem7: "检测和预防欺诈、滥用或安全问题",
+    privacyInfoUseItem8: "遵守法律义务和保护我们的依法权利",
+    
+    privacyDataSecurityTitle: "数据安全",
+    privacyDataSecurityDesc: "我们实施行业标准的安全措施来保护您的信息：",
+    privacyDataSecurityItem1: "所有数据传输都使用SSL/TLS加密",
+    privacyDataSecurityItem2: "上传的文件在处理后立即删除",
+    privacyDataSecurityItem3: "访问控制和身份验证协议",
+    privacyDataSecurityItem4: "定期安全审计和监控",
+    privacyDataSecurityItem5: "安全的云基础设施和数据存储",
+    
+    privacyDataRetentionTitle: "数据保留",
+    privacyDataRetentionDesc: "我们的数据保留政策：",
+    privacyDataRetentionItem1: "上传的视频文件在AI处理完成后立即删除",
+    privacyDataRetentionItem2: "生成的提示词不会永久存储在我们的服务器上",
+    privacyDataRetentionItem3: "使用日志保留30天用于技术支持和改进",
+    privacyDataRetentionItem4: "分析数据以匿名和聚合形式保留",
+    privacyDataRetentionItem5: "您可以随时请求删除您的数据",
+    
+    privacyThirdPartyTitle: "第三方服务",
+    privacyThirdPartyDesc: "我们使用可信的第三方服务：",
+    privacyThirdPartyItem1: "Google Cloud Platform用于AI处理和基础设施",
+    privacyThirdPartyItem2: "分析服务用于了解使用模式",
+    privacyThirdPartyItem3: "内容分发网络(CDN)用于改善性能",
+    privacyThirdPartyItem4: "所有第三方服务提供商都遵守严格的隐私标准",
+    
+    privacyUserRightsTitle: "您的权利",
+    privacyUserRightsDesc: "您对您的个人信息拥有以下权利：",
+    privacyUserRightsItem1: "访问我们持有的关于您的信息",
+    privacyUserRightsItem2: "请求更正不准确的信息",
+    privacyUserRightsItem3: "请求删除您的个人数据",
+    privacyUserRightsItem4: "反对处理您的信息",
+    privacyUserRightsItem5: "数据可携带性（在适用的情况下）",
+    
+    privacyInternationalTransferTitle: "国际数据传输",
+    privacyInternationalTransferDesc: "您的数据可能会被传输到您所在国家/地区以外的地方进行处理。我们确保所有国际数据传输都符合适用的数据保护法律，并实施适当的保护措施来保护您的信息。",
+    
+    privacyPolicyChangesTitle: "政策变更",
+    privacyPolicyChangesDesc: "我们可能会不时更新本隐私政策。任何变更都将在本页面发布，重大变更将通过电子邮件或我们服务上的显著通知告知您。我们鼓励您定期查看本政策以了解最新信息。",
+    
+    privacyContactTitle: "联系我们",
+    privacyContactDesc: "如果您对本隐私政策有任何疑问或担忧，或希望行使您的权利，请通过以下方式联系我们：",
+    privacyContactEmail: "电子邮件：privacy@veo3promptgenerator.com",
+    privacyContactAddress: "地址：[您的公司地址]",
+    privacyContactResponse: "我们将在收到您的询问后30天内回复。",
+  },
+
+
+  
+  fr: {
+    // SEO and Branding
+    siteTitle: "Générateur de Prompts Veo3 Gratuit en Ligne",
+    mainHeading: "Générateur de Prompts Veo3",
+    accentWord: "Prompts",
+
+    // Navigation
+    home: "Accueil",
+    tools: "Outils",
+    blog: "Blog",
+    about: "À propos",
+    contact: "Contact",
+    getStarted: "Commencer",
+
+    // Main Tools Navigation
+    videoScriptGenerator: "Générateur de Script Vidéo",
+    veo3PromptGenerator: "Générateur de Prompts Veo3",
+
+    // Video Script Generator
+    videoTopic: "Sujet vidéo et personnages principaux (Décrire en 1-2 phrases)",
+    videoTopicPlaceholder:
+      "Exemple: Nouvelle publicité produit, introduction produit, guide d'utilisation produit,...\nPersonnages: Exemple: Bébé Bi, M. A, Mme B,...",
+    audience: "Qui est votre audience?",
+    selectAudience: "Sélectionner l'audience",
+    scriptLength: "Longueur du script",
+    selectLength: "Sélectionner la longueur",
+    scriptStyle: "Style du script",
+    selectStyle: "Sélectionner le style",
+    language: "Langue",
+    vietnamese: "Vietnamien",
+    english: "Anglais",
+    french: "Français",
+    spanish: "Espagnol",
+    german: "Allemand",
+    generator: "Générateur",
+
+    // Video Script Generator - Extended
+    videoScriptGeneratorTitle: "Générateur de Script Vidéo",
+    videoScriptGeneratorSubtitle: "Créez des scripts vidéo convaincants avec notre générateur alimenté par l'IA. Parfait pour les créateurs de contenu YouTube, TikTok, Instagram et réseaux sociaux.",
+    videoScriptGeneratorFreeOnline: "Gratuit en Ligne",
+    
+    // Form Labels and Placeholders
+    videoTopicAndCharacters: "Sujet Vidéo et Personnages Principaux:",
+    videoTopicExample: "Exemple: Un court métrage sur un robot solitaire qui trouve une fleur, mettant en scène un robot curieux et une fleur vibrante et lumineuse.",
+    
+    // Buttons and Actions
+    generateScript: "Générer le Script",
+    generatingScript: "Génération du Script...",
+    clearForm: "Effacer",
+    copyScript: "Copier le Script",
+    newScript: "Nouveau Script",
+    
+    // Messages
+    missingInformation: "Informations Manquantes",
+    missingInformationDesc: "Veuillez remplir tous les champs requis.",
+    scriptGeneratedSuccessfully: "Script généré avec succès!",
+    scriptGeneratedDesc: "Votre script vidéo est prêt.",
+    generationFailed: "Échec de la génération",
+    generationFailedDesc: "Échec de la génération du script. Veuillez réessayer.",
+    
+    // Output
+    generatedScriptTitle: "Script Généré:",
+    
+    // How It Works Section
+    howVideoScriptGeneratorWorks: "Comment Fonctionne le Générateur de Script Vidéo",
+    scriptStep1Title: "Décrivez Votre Vidéo",
+    scriptStep1Desc: "Entrez le sujet de votre vidéo et décrivez les personnages principaux ou éléments que vous voulez inclure dans votre script.",
+    scriptStep2Title: "Génération IA",
+    scriptStep2Desc: "Notre IA avancée analyse votre saisie et génère un script vidéo professionnel avec une structure et un flux appropriés.",
+    scriptStep3Title: "Télécharger et Utiliser",
+    scriptStep3Desc: "Copiez le script généré et utilisez-le pour votre production vidéo, avec des descriptions de scènes claires et des dialogues.",
+    
+    // About Section
+    aboutVideoScriptGenerator: "À Propos du Générateur de Script Vidéo",
+    aboutVideoScriptGeneratorDesc: "Notre Générateur de Script Vidéo est un outil puissant alimenté par l'IA conçu pour aider les créateurs de contenu, cinéastes et producteurs vidéo à créer des scripts convaincants rapidement et efficacement. En décrivant simplement votre concept vidéo et personnages principaux, notre IA avancée génère des scripts de qualité professionnelle qui incluent des descriptions de scènes, dialogues de personnages et flux narratif. Cet outil est parfait pour les créateurs YouTube, influenceurs des réseaux sociaux, équipes marketing et quiconque a besoin de produire du contenu vidéo engageant avec un script clair et structuré.",
+    
+    // FAQ Section
+    videoScriptFaqTitle: "Questions Fréquemment Posées",
+    faqVideoTypesQuestion: "Quels types de vidéos puis-je créer des scripts?",
+    faqVideoTypesAnswer: "Notre Générateur de Script Vidéo peut créer des scripts pour divers types de vidéos incluant les vidéos YouTube, contenu TikTok, Instagram Reels, vidéos éducatives, contenu promotionnel, vidéos narratives, et plus. Décrivez simplement votre concept et l'IA adaptera le script en conséquence.",
+    faqScriptLengthQuestion: "Quelle est la longueur des scripts générés?",
+    faqScriptLengthAnswer: "La longueur du script varie selon votre saisie et exigences. Vous pouvez spécifier si vous avez besoin d'un script court de 30 secondes ou d'un script vidéo plus long de 5-10 minutes. L'IA ajustera le contenu et le niveau de détail en conséquence.",
+    faqEditScriptQuestion: "Puis-je modifier le script généré?",
+    faqEditScriptAnswer: "Absolument! Le script généré est un point de départ que vous pouvez copier, modifier et personnaliser pour correspondre à vos besoins spécifiques, style et voix de marque. N'hésitez pas à modifier les dialogues, ajouter des détails ou ajuster la structure.",
+    faqCommercialUseQuestion: "Le script convient-il à un usage commercial?",
+    faqCommercialUseAnswer: "Oui, les scripts générés par notre outil sont libres d'utilisation pour les projets personnels et commerciaux. Cependant, nous recommandons de réviser et personnaliser le contenu pour s'assurer qu'il s'aligne avec vos directives de marque et exigences légales.",
+
+    // Video to Prompt Generator - Extended
+    videoToPromptGeneratorTitle: "Générateur Vidéo vers Prompt",
+    videoToPromptGeneratorSubtitle: "Transformez vos vidéos existantes en prompts IA détaillés. Téléchargez une vidéo et obtenez des prompts complets pour les plateformes de génération vidéo IA.",
+    videoToPromptFreeOnline: "Gratuit en Ligne",
+    
+    // Upload Section
+    uploadVideo: "Télécharger Vidéo:",
+    dragDropVideo: "Glissez-déposez un fichier vidéo ici, ou cliquez pour sélectionner",
+    dropVideoHere: "Déposez la vidéo ici...",
+    supportedFormats: "Supporte MP4, MOV, AVI (Max 100MB)",
+    
+    // Messages
+    videoUploadedSuccessfully: "Vidéo téléchargée avec succès!",
+    videoUploadedDesc: "a été téléchargée.",
+    invalidFileType: "Type de fichier invalide",
+    invalidFileTypeDesc: "Veuillez télécharger un fichier vidéo.",
+    noVideoUploaded: "Aucune vidéo téléchargée",
+    noVideoUploadedDesc: "Veuillez d'abord télécharger un fichier vidéo.",
+    promptGeneratedSuccessfully: "Prompt généré avec succès!",
+    promptGeneratedDesc: "Votre prompt vidéo est prêt.",
+    
+    // Buttons and Actions
+    analyzingVideo: "Analyse de la Vidéo...",
+    generatePrompt: "Générer le Prompt",
+    clearAll: "Effacer Tout",
+    
+    // Output
+    generatedPromptTitle: "Prompt Généré:",
+    
+    // How It Works Section
+    howVideoToPromptWorks: "Comment Fonctionne le Générateur Vidéo vers Prompt",
+    videoPromptStep1Title: "Téléchargez Votre Vidéo",
+    videoPromptStep1Desc: "Téléchargez n'importe quel fichier vidéo (MP4, MOV, AVI) jusqu'à 100MB. Notre système analysera le contenu visuel.",
+    videoPromptStep2Title: "Analyse IA",
+    videoPromptStep2Desc: "Notre IA avancée extrait les éléments visuels clés, scènes, objets et actions de votre vidéo.",
+    videoPromptStep3Title: "Générer le Prompt",
+    videoPromptStep3Desc: "Obtenez un prompt complet qui peut être utilisé pour générer du contenu vidéo similaire ou amélioré avec les plateformes IA.",
+    
+    // About Section
+    aboutVideoToPromptGenerator: "À Propos du Générateur Vidéo vers Prompt",
+    aboutVideoToPromptGeneratorDesc: "Notre Générateur Vidéo vers Prompt est un outil innovant alimenté par l'IA qui transforme vos vidéos existantes en prompts détaillés pour les plateformes de génération vidéo IA. En analysant le contenu de votre vidéo, notre IA avancée extrait les éléments visuels clés, scènes, objets et actions pour créer des prompts complets qui peuvent être utilisés pour générer du contenu vidéo similaire ou amélioré. Cet outil est parfait pour les créateurs de contenu, marketeurs et producteurs vidéo qui veulent exploiter leur contenu existant pour créer de nouvelles vidéos générées par IA avec un style et un message cohérents.",
+    
+    // FAQ Section
+    videoToPromptFaqTitle: "Questions Fréquemment Posées",
+    faqVideoFormatsQuestion: "Quels formats vidéo sont supportés?",
+    faqVideoFormatsAnswer: "Nous supportons la plupart des formats vidéo courants incluant MP4, MOV, AVI, et plus. La taille maximale de fichier est de 100MB pour assurer un traitement et une analyse rapides.",
+    faqPromptAccuracyQuestion: "Quelle est la précision des prompts générés?",
+    faqPromptAccuracyAnswer: "Notre IA fournit une analyse très précise des éléments visuels, scènes et actions. Les prompts générés capturent l'essence et les composants clés de votre vidéo originale pour une génération vidéo IA efficace.",
+    faqAIPlatformCompatibilityQuestion: "Puis-je utiliser les prompts avec n'importe quelle plateforme vidéo IA?",
+    faqAIPlatformCompatibilityAnswer: "Oui! Les prompts générés sont conçus pour être compatibles avec la plupart des plateformes de génération vidéo IA incluant Runway, Pika Labs, Veo3, et autres. Vous pouvez modifier les prompts selon les besoins pour des plateformes spécifiques.",
+    faqVideoSecurityQuestion: "Mon contenu vidéo est-il sécurisé?",
+    faqVideoSecurityAnswer: "Absolument. Nous priorisons votre confidentialité et sécurité. Les vidéos sont traitées de manière sécurisée et ne sont pas stockées de façon permanente. Nous analysons seulement le contenu pour générer des prompts et ne conservons pas vos fichiers vidéo.",
+
+    // Veo3 Prompt Generator - Structured Mode
+    structuredMode: "Mode Structuré",
+    chatMode: "Mode Chat",
+    mainSubject: "Décrivez le sujet principal de la vidéo en détail?",
+    mainSubjectPlaceholder: "Décrivez l'apparence du sujet principal",
+    mainSubjectRequired: "Ce champ est requis",
+    sceneAction: "Que se passe-t-il dans la scène?",
+    sceneActionPlaceholder: "Que fait ou ressent le sujet dans la scène?",
+    sceneActionRequired: "Ce champ est requis",
+    dialogue: "Y a-t-il un dialogue ou un son spécifique que vous voulez dans la vidéo?",
+    dialogueOptional: "(optionnel)",
+    dialoguePlaceholder: "Ajoutez du dialogue, de la musique ou des effets sonores si nécessaire.",
+    cameraMovement: "Comment la caméra doit-elle bouger ou cadrer la prise?",
+    cameraOptional: "(optionnel)",
+    cameraPlaceholder: "Vous pouvez décrire des choses comme zoom lent, vue aérienne, gros plan, plan de suivi, etc.",
+    otherDetails: "D'autres détails que vous voulez inclure?",
+    otherDetailsOptional: "(optionnel)",
+    otherDetailsPlaceholder:
+      "Cela pourrait être l'éclairage, la météo, les objets, l'ambiance, ou de petites touches dans l'environnement",
+    subtitles: "Voulez-vous des sous-titres dans la vidéo?",
+    subtitlesOptional: "(optionnel)",
+    yes: "Oui",
+    no: "Non",
+    generate: "Générer",
+
+    // Chat Mode
+    chatPrompt:
+      "Veuillez décrire votre idée clairement, spécifier les dimensions vidéo requises, et définir précisément votre audience cible. Exemple: Un astronaute embarquant dans une mission d'exploration vers la lune, vidéo verticale pour TikTok ciblant les passionnés d'espace et de corps célestes",
+    chatPlaceholder: "Décrivez la vidéo que vous voulez créer...",
+    generateVideoPrompt: "Générer un Prompt Vidéo",
+
+    // Audiences
+    generalAudience: "Audience Générale",
+    teenagers: "Adolescents (13-19)",
+    youngAdults: "Jeunes Adultes (20-35)",
+    professionals: "Professionnels",
+    parents: "Parents",
+    seniors: "Seniors (55+)",
+
+    // Script Lengths
+    length15to30: "15-30 secondes",
+    length30to60: "30-60 secondes",
+    length1to2min: "1-2 minutes",
+    length2to5min: "2-5 minutes",
+    length5to10min: "5-10 minutes",
+
+    // Script Styles
+    conversational: "Conversationnel",
+    professional: "Professionnel",
+    energetic: "Énergique",
+    educational: "Éducatif",
+    storytelling: "Narratif",
+    promotional: "Promotionnel",
+
+    // Footer
+    footerDescription:
+      "Transformez vos idées en prompts vidéo puissants avec une technologie IA de pointe. Notre plateforme combine l'ingénierie de prompts avancée avec un design intuitif pour aider les créateurs de contenu, les marketeurs et les entreprises à générer des scripts vidéo convaincants et des prompts détaillés pour les outils de génération vidéo IA comme Veo 3 de Google.",
+    
+    // Footer Sections
+    coreTools: "Outils Principaux",
+    // tools: "Outils",
+    company: "Entreprise",
+    legal: "Légal",
+    
+    // Footer Links
+    videoScriptGeneratorFooter: "Générateur de Script Vidéo",
+    veo3PromptGeneratorFooter: "Générateur de Prompt Veo3",
+    videoToPromptFooter: "Vidéo vers Prompt",
+    videoTranscriptionFooter: "Transcription Vidéo",
+    promptGuideFooter: "Guide des Prompts",
+    promptLibraryFooter: "Bibliothèque de Prompts",
+    aboutFooter: "À Propos",
+    contactFooter: "Contact",
+    blogFooter: "Blog",
+    communityFooter: "Communauté",
+    privacyPolicyFooter: "Politique de Confidentialité",
+    termsOfServiceFooter: "Conditions d'Utilisation",
+    disclaimerFooter: "Avertissement",
+    sitemapFooter: "Plan du Site",
+    
+    // Footer Copyright
+    allRightsReserved: "Tous droits réservés.",
+
+    // Tools Pages
+    videoToPrompt: "Vidéo vers Prompt",
+    transcription: "Transcription",
+    promptGuide: "Guide des Prompts",
+    promptLibrary: "Bibliothèque de Prompts",
+
+    // Hero Section
+    aiPoweredBadge: "🚀 Génération de Contenu IA",
+    heroFree: "Gratuit",
+
+    // Feature Cards
+    lightningFast: "Ultra Rapide",
+    lightningFastDesc: "Obtenez des résultats en secondes avec des algorithmes IA optimisés",
+    securePrivate: "Sécurisé et Privé",
+    securePrivateDesc: "Sécurité de niveau entreprise avec suppression automatique des fichiers",
+    advancedAI: "IA Avancée",
+    advancedAIDesc: "Alimenté par Gemini 2.5 Pro avec basculement intelligent",
+    multiFormat: "Multi-Format",
+    multiFormatDesc: "Support pour les images, vidéos et fichiers audio",
+
+    // Prompt Library Page
+    promptLibraryTitle: "Bibliothèque de Prompts",
+    promptLibrarySubtitle: "Découvrez des prompts professionnels pour divers styles vidéo et cas d'usage.",
+    cinematicPortrait: "Portrait Cinématographique",
+    natureLandscape: "Paysage Naturel",
+    productShowcase: "Présentation Produit",
+    urbanStreetScene: "Scène de Rue Urbaine",
+    portrait: "Portrait",
+    nature: "Nature",
+    commercial: "Commercial",
+    urban: "Urbain",
+    landscape: "Paysage",
+    goldenHour: "Heure Dorée",
+    product: "Produit",
+    clean: "Épuré",
+    street: "Rue",
+    documentary: "Documentaire",
+    copy: "Copier",
+    createYourOwnPrompts: "Créez Vos Propres Prompts",
+    createYourOwnPromptsDesc: "Utilisez notre générateur alimenté par l'IA pour créer des prompts personnalisés adaptés à vos besoins spécifiques.",
+    generateCustomPrompts: "Générer des Prompts Personnalisés",
+
+    // Common
+    loading: "Chargement...",
+    error: "Erreur survenue",
+    success: "Succès",
+    required: "requis",
+    optional: "optionnel",
   },
 } as const
 

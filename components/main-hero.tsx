@@ -15,7 +15,7 @@ import {
   Mic
 } from "lucide-react"
 import Link from "next/link"
-import { useLocale } from "@/hooks/use-locale"
+import { useLocale, generateI18nPath } from "@/hooks/use-locale"
 import { getTranslation } from "@/lib/i18n"
 
 export function MainHero() {
@@ -57,7 +57,7 @@ export function MainHero() {
             </Badge>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              {getTranslation(currentLocale, 'mainHeading')} <span className="text-purple-700 dark:text-purple-700">{getTranslation(currentLocale, 'accentWord')}</span> {getTranslation(currentLocale, 'heroFree')}
+              {getTranslation(currentLocale, 'mainHeading')} <br /><span className="text-purple-700 dark:text-purple-700">{getTranslation(currentLocale, 'accentWord')}</span> {getTranslation(currentLocale, 'heroFree')}
             </h1>
 
             <p className="text-sm xs:text-base sm:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -67,13 +67,13 @@ export function MainHero() {
             {/* Main Action Buttons - Mobile Optimized */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-8">
               <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg">
-                <Link href="/veo3-prompt-generator">
+                <Link href={generateI18nPath("/veo3-prompt-generator", currentLocale)}>
                   <Video className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
                   {getTranslation(currentLocale, 'veo3PromptGenerator')}
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg">
-                <Link href="/video-script-generator">
+                <Link href={generateI18nPath("/video-script-generator", currentLocale)}>
                   <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
                   {getTranslation(currentLocale, 'videoScriptGenerator')}
                 </Link>
@@ -83,19 +83,19 @@ export function MainHero() {
             {/* Secondary Tools - Mobile Optimized */}
             <div className="grid grid-cols-2 gap-2 mb-6 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
-                <Link href="/video-to-prompt">
+                <Link href={generateI18nPath("/video-to-prompt", currentLocale)}>
                   <Camera className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   {getTranslation(currentLocale, 'videoToPrompt')}
                 </Link>
               </Button>
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
-                <Link href="/prompt-guide">
+                <Link href={generateI18nPath("/prompt-guide", currentLocale)}>
                   <Brain className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   {getTranslation(currentLocale, 'promptGuide')}
                 </Link>
               </Button>
               <Button asChild variant="ghost" size="sm" className="text-xs sm:text-sm">
-                <Link href="/prompt-library">
+                <Link href={generateI18nPath("/prompt-library", currentLocale)}>
                   <Award className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   {getTranslation(currentLocale, 'promptLibrary')}
                 </Link>

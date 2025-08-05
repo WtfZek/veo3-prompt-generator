@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useLocale } from "@/hooks/use-locale"
+import { useLocale, generateI18nPath } from "@/hooks/use-locale"
 import { getTranslation } from "@/lib/i18n"
 
 export function Footer() {
@@ -12,15 +12,15 @@ export function Footer() {
       <div className="container mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-6 xs:py-8 sm:py-12">
         {/* Logo and Name */}
         <div className="mb-4 xs:mb-6 sm:mb-8 text-center">
-          <Link href="/" className="inline-flex items-center gap-2 xs:gap-3">
+          <Link href={generateI18nPath("/", currentLocale)} className="inline-flex items-center gap-2 xs:gap-3">
             <Image 
               src="/images/veo3-logo-new.png" 
-              alt="veo3promptgenerator.online" 
+              alt="feishu-veo3-prompt.cn" 
               width={40} 
               height={40} 
               className="h-5 w-auto xs:h-6 sm:h-8"
             />
-            <span className="text-base xs:text-lg sm:text-xl font-bold text-primary">veo3promptgenerator.online</span>
+            <span className="text-base xs:text-lg sm:text-xl font-bold text-primary">飞鼠 Veo3 提示词</span>
           </Link>
         </div>
 
@@ -29,19 +29,18 @@ export function Footer() {
             <h3 className="font-semibold mb-2 xs:mb-3 sm:mb-4 text-xs xs:text-sm sm:text-base">{getTranslation(currentLocale,"coreTools")}</h3>
             <ul className="space-y-1 xs:space-y-2 sm:space-y-3 text-xs xs:text-sm">
               <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById("video-script-generator")
-                    if (element) element.scrollIntoView({ behavior: "smooth" })
-                  }}
-                  className="text-muted-foreground hover:text-primary cursor-pointer text-left w-full py-1"
-                >
+                <Link href={generateI18nPath("/video-script-generator", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"videoScriptGeneratorFooter")}
-                </button>
+                </Link>
               </li>
               <li>
-                <Link href="/veo3-prompt-generator" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/veo3-prompt-generator", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"veo3PromptGeneratorFooter")}
+                </Link>
+              </li>
+              <li>
+                <Link href={generateI18nPath("/prompt-library", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
+                  {getTranslation(currentLocale,"promptLibraryFooter")}
                 </Link>
               </li>
             </ul>
@@ -51,7 +50,7 @@ export function Footer() {
             <h3 className="font-semibold mb-2 xs:mb-3 sm:mb-4 text-xs xs:text-sm sm:text-base">{getTranslation(currentLocale,"tools")}</h3>
             <ul className="space-y-1 xs:space-y-2 sm:space-y-3 text-xs xs:text-sm">
               <li>
-                <Link href="/video-to-prompt" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/video-to-prompt", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"videoToPromptFooter")}
                 </Link>
               </li>
@@ -61,15 +60,15 @@ export function Footer() {
                 </span>
               </li>
               <li>
-                <Link href="/prompt-guide" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/prompt-guide", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"promptGuideFooter")}
                 </Link>
               </li>
-              <li>
-                <Link href="/prompt-library" className="text-muted-foreground hover:text-primary block py-1">
+              {/* <li>
+                <Link href={generateI18nPath("/prompt-library", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"promptLibraryFooter")}
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -77,43 +76,43 @@ export function Footer() {
             <h3 className="font-semibold mb-2 xs:mb-3 sm:mb-4 text-xs xs:text-sm sm:text-base">{getTranslation(currentLocale,"company")}</h3>
             <ul className="space-y-1 xs:space-y-2 sm:space-y-3 text-xs xs:text-sm">
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/about", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"aboutFooter")}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/contact", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"contactFooter")}
                 </Link>
               </li>
               {/* <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/blog", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"blogFooter")}
                 </Link>
               </li> */}
-              <li>
-                <Link href="/community" className="text-muted-foreground hover:text-primary block py-1">
+              {/* <li>
+                <Link href={generateI18nPath("/community", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"communityFooter")}
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-2 xs:mb-3 sm:mb-4 text-xs xs:text-sm sm:text-base">{getTranslation(currentLocale,"legal")}</h3>
             <ul className="space-y-1 xs:space-y-2 sm:space-y-3 text-xs xs:text-sm">
-              <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-primary block py-1">
+              {/* <li>
+                <Link href={generateI18nPath("/privacy", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"privacyPolicyFooter")}
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/terms", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"termsOfServiceFooter")}
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link href="/disclaimer" className="text-muted-foreground hover:text-primary block py-1">
+                <Link href={generateI18nPath("/disclaimer", currentLocale)} className="text-muted-foreground hover:text-primary block py-1">
                   {getTranslation(currentLocale,"disclaimerFooter")}
                 </Link>
               </li>
@@ -127,7 +126,7 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-6 xs:mt-8 sm:mt-12 pt-4 xs:pt-6 sm:pt-8 text-center text-xs xs:text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} VeO3 Prompt Generator. {getTranslation(currentLocale,"allRightsReserved")}.</p>
+          <p>&copy; {new Date().getFullYear()} 飞鼠科技有限公司. {getTranslation(currentLocale,"allRightsReserved")}.</p>
         </div>
       </div>
     </footer>

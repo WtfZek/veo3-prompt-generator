@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "zh_CN",
     url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: "Veo3 Prompt Generator",
     title: "Veo3 Prompt Generator Free Online - AI Video Script & Prompt Tool",
@@ -58,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <body className={poppins.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         alt: "Veo3 Prompt Generator - AI Video Prompt Creator",
       },
     ],
-    locale: "en_US",
+    locale: "zh_CN",
     type: "website",
   },
   twitter: {

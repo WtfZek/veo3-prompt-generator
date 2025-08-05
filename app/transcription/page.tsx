@@ -123,7 +123,7 @@ export default function TranscriptionPage() {
     { value: "auto", label: "Auto Detect" },
     { value: "en", label: "English" },
     { value: "es", label: "Spanish" },
-    { value: "fr", label: "French" },
+    // { value: "fr", label: "French" },
     { value: "de", label: "German" },
     { value: "it", label: "Italian" },
     { value: "pt", label: "Portuguese" },
@@ -377,4 +377,4 @@ export default function TranscriptionPage() {
       </div>
     </div>
   )
-} 
+}

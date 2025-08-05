@@ -171,7 +171,7 @@ export default function ContactPage() {
                   </CardContent>
                 </Card>
 
-                <Card>
+                {/* <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Headphones className="h-5 w-5" />
@@ -185,9 +185,9 @@ export default function ContactPage() {
                     </Button>
                     <p className="text-sm text-muted-foreground mt-2">{getTranslation(currentLocale, 'liveChatHours')}</p>
                   </CardContent>
-                </Card>
+                </Card> */}
 
-                <Card>
+                {/* <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Users className="h-5 w-5" />
@@ -201,7 +201,7 @@ export default function ContactPage() {
                     </Button>
                     <p className="text-sm text-muted-foreground mt-2">{getTranslation(currentLocale, 'communitySupport')}</p>
                   </CardContent>
-                </Card>
+                </Card> */}
 
                 <Card>
                   <CardHeader>
@@ -214,11 +214,11 @@ export default function ContactPage() {
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>{getTranslation(currentLocale, 'mondayFriday')}</span>
-                        <span>9:00 AM - 6:00 PM PST</span>
+                        <span>9:00 - 6:00 PST</span>
                       </div>
                       <div className="flex justify-between">
                         <span>{getTranslation(currentLocale, 'saturday')}</span>
-                        <span>10:00 AM - 4:00 PM PST</span>
+                        <span>10:00 - 4:00 PST</span>
                       </div>
                       <div className="flex justify-between">
                         <span>{getTranslation(currentLocale, 'sunday')}</span>
@@ -238,11 +238,7 @@ export default function ContactPage() {
                   <CardContent>
                     <p className="text-muted-foreground mb-2">{getTranslation(currentLocale, 'visitOffice')}</p>
                     <address className="text-sm not-italic">
-                      123 Innovation Drive
-                      <br />
-                      San Francisco, CA 94105
-                      <br />
-                      United States
+                      湖北省武汉市青山区招商时代总部 B 栋 - 2105
                     </address>
                   </CardContent>
                 </Card>

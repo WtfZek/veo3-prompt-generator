@@ -3,6 +3,7 @@ import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Globe } from "lucide-react"
+import { switchI18nLanguage } from "@/hooks/use-locale"
 import type { Locale } from "@/lib/i18n"
 
 interface LanguageSelectorProps {
@@ -14,20 +15,7 @@ export function LanguageSelector({ currentLocale }: LanguageSelectorProps) {
   const pathname = usePathname()
 
   const switchLanguage = (locale: Locale) => {
-    let newPath = pathname
-    
-    // Remove existing language prefix
-    if (pathname.startsWith('/fr')) {
-      newPath = pathname.replace(/^\/fr/, '') || '/'
-    } else if (pathname.startsWith('/zh')) {
-      newPath = pathname.replace(/^\/zh/, '') || '/'
-    }
-    
-    // Add new language prefix (except for English)
-    if (locale !== 'en') {
-      newPath = `/${locale}${newPath}`
-    }
-    
+    const newPath = switchI18nLanguage(pathname, locale)
     router.push(newPath)
   }
 
@@ -40,15 +28,15 @@ export function LanguageSelector({ currentLocale }: LanguageSelectorProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => switchLanguage("en")} className={currentLocale === "en" ? "bg-accent" : ""}>
-          🇺🇸 English
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => switchLanguage("fr")} className={currentLocale === "fr" ? "bg-accent" : ""}>
-          🇫🇷 Français
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => switchLanguage("zh")} className={currentLocale === "zh" ? "bg-accent" : ""}>
           🇨🇳 简体中文
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => switchLanguage("en")} className={currentLocale === "en" ? "bg-accent" : ""}>
+          🇺🇸 English
+        </DropdownMenuItem>
+        {/* <DropdownMenuItem onClick={() => switchLanguage("fr")} className={currentLocale === "fr" ? "bg-accent" : ""}>
+          🇫🇷 Français
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -8,7 +8,7 @@ import { Menu, X, Globe, Sparkles, FileText, ChevronDown } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import { locales, type Locale, getTranslation } from "@/lib/i18n"
 import { useRouter, usePathname } from "next/navigation"
-import { useLocale } from "@/hooks/use-locale"
+import { useLocale, generateI18nPath, switchI18nLanguage, useTranslations } from "@/hooks/use-locale"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,68 +17,19 @@ export function Header() {
   const toolsMenuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const pathname = usePathname()
-
+  const { t } = useTranslations()
   const currentLocale = useLocale()
   
-  // 生成带语言前缀的链接
-  const getLocalizedPath = (path: string) => {
-    if (currentLocale === 'en') {
-      return path
-    }
-    return `/${currentLocale}${path}`
-  }
-
-  // 智能链接生成：为不支持多语言的页面添加语言偏好参数
-  const getSmartLink = (path: string) => {
-    // 首页使用完整的多语言路径
-    if (path === '/') {
-      return getLocalizedPath(path)
-    }
-    
-    // 其他页面：如果用户当前在非英语环境，添加语言偏好参数
-    if (currentLocale !== 'en') {
-      return `${path}?lang=${currentLocale}`
-    }
-    
-    return path
-  }
-
   const switchLanguage = (locale: Locale) => {
     setIsLanguageMenuOpen(false)
-    let newPath = pathname
-    
-    // 移除现有的语言前缀
-    if (pathname.startsWith('/fr')) {
-      newPath = pathname.replace(/^\/fr/, '') || '/'
-    } else if (pathname.startsWith('/zh')) {
-      newPath = pathname.replace(/^\/zh/, '') || '/'
-    }
-    
-    // 检查是否是首页，如果是首页则可以切换到对应语言
-    if (newPath === '/') {
-      if (locale !== 'en') {
-        newPath = `/${locale}/`
-      }
-      router.push(newPath)
-    } else {
-      // 对于其他页面，采用更智能的策略
-      if (locale === 'en') {
-        // 切换到英语：保持在当前页面
-        router.push(newPath)
-      } else {
-        // 切换到非英语：在当前页面添加语言偏好参数
-        // 这样用户可以看到页面内容，同时记住语言偏好
-        const hasQuery = newPath.includes('?')
-        const separator = hasQuery ? '&' : '?'
-        router.push(`${newPath}${separator}lang=${locale}`)
-      }
-    }
+    const newPath = switchI18nLanguage(pathname, locale)
+    router.push(newPath)
   }
 
   const languageNames = {
+    zh: '简体中文',
     en: 'English',
-    fr: 'Français',
-    zh: '简体中文'
+    fr: 'Français'
   }
 
   // Auto-close Tools dropdown when mouse leaves
@@ -112,7 +63,7 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-4 xs:space-x-6">
             <Link
-              href={getLocalizedPath('/')}
+              href={generateI18nPath('/', currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'home')}
@@ -124,25 +75,25 @@ export function Header() {
               {getTranslation(currentLocale, 'blog')}
             </Link> */}
             <Link
-              href={getSmartLink("/prompt-guide")}
+              href={generateI18nPath("/prompt-guide", currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'promptGuide')}
             </Link>
             <Link
-              href={getSmartLink("/about")}
+              href={generateI18nPath("/about", currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'about')}
             </Link>
             <Link
-              href={getSmartLink("/contact")}
+              href={generateI18nPath("/contact", currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'contact')}
             </Link>
             <Link
-              href={getSmartLink("/disclaimer")}
+              href={generateI18nPath("/disclaimer", currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'disclaimer')}
@@ -171,7 +122,7 @@ export function Header() {
               {isToolsMenuOpen && (
                 <div className="absolute right-0 top-full mt-1 w-56 bg-background border rounded-lg shadow-xl py-2 backdrop-blur-sm">
                   <Link
-                    href="/"
+                    href={generateI18nPath("/", currentLocale)}
                     className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
                     onClick={() => setIsToolsMenuOpen(false)}
                   >
@@ -179,7 +130,7 @@ export function Header() {
                     {getTranslation(currentLocale, 'veo3PromptGenerator')}
                   </Link>
                   <Link
-                    href="/video-script-generator"
+                    href={generateI18nPath("/video-script-generator", currentLocale)}
                     className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
                     onClick={() => setIsToolsMenuOpen(false)}
                   >
@@ -187,7 +138,7 @@ export function Header() {
                     {getTranslation(currentLocale, 'videoScriptGenerator')}
                   </Link>
                   <Link
-                    href="/video-to-prompt"
+                    href={generateI18nPath("/video-to-prompt", currentLocale)}
                     className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
                     onClick={() => setIsToolsMenuOpen(false)}
                   >
@@ -250,7 +201,7 @@ export function Header() {
               {/* Main Navigation Links */}
               <div className="space-y-3 xs:space-y-4">
                 <Link
-                  href={getLocalizedPath('/')}
+                  href={generateI18nPath('/', currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -264,32 +215,32 @@ export function Header() {
                   {getTranslation(currentLocale, 'blog')}
                 </Link> */}
                 <Link
-                  href={getSmartLink("/prompt-guide")}
+                  href={generateI18nPath("/prompt-guide", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getTranslation(currentLocale, 'promptGuide')}
                 </Link>
                 <Link
-                  href={getSmartLink("/about")}
+                  href={generateI18nPath("/about", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getTranslation(currentLocale, 'about')}
                 </Link>
                 <Link
-                  href={getSmartLink("/contact")}
+                  href={generateI18nPath("/contact", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getTranslation(currentLocale, 'contact')}
                 </Link>
                 <Link
-                  href={getSmartLink("/disclaimer")}
+                  href={generateI18nPath("/disclaimer", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Disclaimer
+                  {getTranslation(currentLocale, 'disclaimer')}
                 </Link>
                 {/* <Link
                   href={getSmartLink("/sitemap")}
@@ -305,7 +256,7 @@ export function Header() {
                 <h3 className="text-sm xs:text-base font-semibold text-foreground mb-3 xs:mb-4 px-3 xs:px-4">{getTranslation(currentLocale, 'tools')}</h3>
                 <div className="space-y-3 xs:space-y-4">
                   <Link
-                    href="/"
+                    href={generateI18nPath("/", currentLocale)}
                     className="flex items-center gap-2 xs:gap-3 text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -313,7 +264,7 @@ export function Header() {
                     {getTranslation(currentLocale, 'veo3PromptGenerator')}
                   </Link>
                   <Link
-                    href="/video-script-generator"
+                    href={generateI18nPath("/video-script-generator", currentLocale)}
                     className="flex items-center gap-2 xs:gap-3 text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -321,7 +272,7 @@ export function Header() {
                     {getTranslation(currentLocale, 'videoScriptGenerator')}
                   </Link>
                   <Link
-                    href="/video-to-prompt"
+                    href={generateI18nPath("/video-to-prompt", currentLocale)}
                     className="flex items-center gap-2 xs:gap-3 text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                     onClick={() => setIsMenuOpen(false)}
                   >
