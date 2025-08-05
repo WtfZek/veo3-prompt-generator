@@ -774,19 +774,22 @@ export const translations = {
     success: "Success",
     required: "required",
     optional: "optional",
+    lightTheme: "Light",
+    darkTheme: "Dark",
+    followSystem: "System",
   },
   zh: {
     // SEO and Branding
-    siteTitle: "Veo3 提示词生成器免费在线版",
+    siteTitle: "Veo3 提示词生成器在线免费",
     mainHeading: "Veo3 提示词生成器",
     accentWord: "",
 
     // Navigation
     home: "首页",
-    tools: "工具",
+    tools: "提示词工具",
     blog: "博客",
-    about: "关于",
-    contact: "联系",
+    about: "关于我们",
+    contact: "联系我们",
     getStarted: "开始使用",
     disclaimer: "免责声明",
     sitemap: "网站地图",
@@ -799,7 +802,7 @@ export const translations = {
     veo3PromptGeneratorTab: "Veo3提示词生成器",
     videoScriptGeneratorTab: "视频脚本生成器", 
     videoToPromptGeneratorTab: "视频转提示词生成器",
-    videoTranscriptionTab: "视频转录 (即将推出)",
+    videoTranscriptionTab: "视频转录 (即将更新)",
 
     // Video Script Generator
     videoTopic: "视频主题和主要角色（用1-2句话描述）",
@@ -823,7 +826,7 @@ export const translations = {
     // Video Script Generator - Extended
     videoScriptGeneratorTitle: "视频脚本生成器",
     videoScriptGeneratorSubtitle: "使用我们的AI驱动生成器创建引人注目的视频脚本。非常适合YouTube、TikTok、Instagram和社交媒体内容创作者。",
-    videoScriptGeneratorFreeOnline: "免费在线",
+    videoScriptGeneratorFreeOnline: "在线免费",
     
     // Form Labels and Placeholders
     videoTopicAndCharacters: "视频主题和主要角色：",
@@ -832,7 +835,7 @@ export const translations = {
     // Buttons and Actions
     generateScript: "生成脚本",
     generatingScript: "正在生成脚本...",
-    clearForm: "清除",
+    clearForm: "清空",
     copyScript: "复制脚本",
     newScript: "新脚本",
     
@@ -874,7 +877,7 @@ export const translations = {
     // Video to Prompt Generator - Extended
     videoToPromptGeneratorTitle: "视频转提示词生成器",
     videoToPromptGeneratorSubtitle: "将您现有的视频转换为详细的AI提示词。上传视频并获得用于AI视频生成平台的全面提示词。",
-    videoToPromptFreeOnline: "免费在线",
+    videoToPromptFreeOnline: "在线免费",
     
     // Upload Section
     uploadVideo: "上传视频：",
@@ -991,11 +994,11 @@ export const translations = {
     videoScriptGeneratorFooter: "视频脚本生成器",
     veo3PromptGeneratorFooter: "Veo3提示词生成器",
     videoToPromptFooter: "视频转提示词",
-    videoTranscriptionFooter: "视频转录 (即将推出)",
+    videoTranscriptionFooter: "视频转录 (即将更新)",
     promptGuideFooter: "提示词指南",
     promptLibraryFooter: "提示词库",
     aboutFooter: "关于",
-    contactFooter: "联系",
+    contactFooter: "联系我们",
     blogFooter: "博客",
     communityFooter: "社区",
     privacyPolicyFooter: "隐私政策",
@@ -1008,7 +1011,7 @@ export const translations = {
 
     // Tools Pages
     videoToPrompt: "视频转提示词",
-    transcription: "视频转录 (即将推出)",
+    transcription: "视频转录 (即将更新)",
 
     promptGuide: "提示词指南",
     promptLibrary: "提示词库",
@@ -1322,7 +1325,7 @@ export const translations = {
     generatePromptsNow: "立即生成提示词 →",
 
     // Veo3 Prompt Generator Page
-    freeOnline: "免费在线版",
+    freeOnline: "在线免费",
     outputOptions: "输出选项",
     paragraphPrompt: "段落提示词",
     jsonPrompt: "JSON提示词",
@@ -1445,6 +1448,9 @@ export const translations = {
     success: "成功",
     required: "必填",
     optional: "可选",
+    lightTheme: "浅色主题",
+    darkTheme: "深色主题",
+    followSystem: "跟随系统",
 
     // Privacy Policy Page
     privacyPolicyTitle: "隐私政策",

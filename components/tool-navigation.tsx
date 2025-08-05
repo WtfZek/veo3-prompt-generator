@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { useLocale } from "@/hooks/use-locale"
+import { useLocale, generateI18nPath } from "@/hooks/use-locale"
 import { getTranslation } from "@/lib/i18n"
 
 interface ToolNavigationProps {
@@ -16,25 +16,25 @@ export function ToolNavigation({ activeTool }: ToolNavigationProps) {
     {
       id: "veo3-prompt-generator",
       name: getTranslation(currentLocale, 'veo3PromptGeneratorTab'),
-      href: "/veo3-prompt-generator",
+      href: generateI18nPath("/veo3-prompt-generator", currentLocale),
       color: "purple"
     },
     {
       id: "video-script-generator", 
       name: getTranslation(currentLocale, 'videoScriptGeneratorTab'),
-      href: "/video-script-generator",
+      href: generateI18nPath("/video-script-generator", currentLocale),
       color: "blue"
     },
     {
       id: "video-to-prompt",
       name: getTranslation(currentLocale, 'videoToPromptGeneratorTab'), 
-      href: "/video-to-prompt",
+      href: generateI18nPath("/video-to-prompt", currentLocale),
       color: "green"
     },
     {
       id: "transcription",
       name: getTranslation(currentLocale, 'videoTranscriptionTab'),
-      href: "#", 
+      href: generateI18nPath("/transcription", currentLocale),
       color: "orange",
       disabled: true
     }

@@ -4,21 +4,25 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X, Globe, Sparkles, FileText, ChevronDown } from "lucide-react"
+import { Menu, X, Globe, Sparkles, FileText, ChevronDown, Award, LogOut, User } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import { locales, type Locale, getTranslation } from "@/lib/i18n"
 import { useRouter, usePathname } from "next/navigation"
 import { useLocale, generateI18nPath, switchI18nLanguage, useTranslations } from "@/hooks/use-locale"
+import { useAuth } from "@/contexts/auth-context"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
   const [isToolsMenuOpen, setIsToolsMenuOpen] = useState(false)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const toolsMenuRef = useRef<HTMLDivElement>(null)
+  const userMenuRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const pathname = usePathname()
   const { t } = useTranslations()
   const currentLocale = useLocale()
+  const { user, logout, isAuthenticated } = useAuth()
   
   const switchLanguage = (locale: Locale) => {
     setIsLanguageMenuOpen(false)
@@ -69,7 +73,7 @@ export function Header() {
               {getTranslation(currentLocale, 'home')}
             </Link>
             {/* <Link
-              href={getSmartLink("/blog")}
+              href={generateI18nPath("/blog", currentLocale)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
             >
               {getTranslation(currentLocale, 'blog')}
@@ -80,49 +84,22 @@ export function Header() {
             >
               {getTranslation(currentLocale, 'promptGuide')}
             </Link>
-            <Link
-              href={generateI18nPath("/about", currentLocale)}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
-            >
-              {getTranslation(currentLocale, 'about')}
-            </Link>
-            <Link
-              href={generateI18nPath("/contact", currentLocale)}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
-            >
-              {getTranslation(currentLocale, 'contact')}
-            </Link>
-            <Link
-              href={generateI18nPath("/disclaimer", currentLocale)}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
-            >
-              {getTranslation(currentLocale, 'disclaimer')}
-            </Link>
-            {/* <Link
-              href={getSmartLink("/sitemap")}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
-            >
-              {getTranslation(currentLocale, 'sitemap')}
-            </Link> */}
-          </nav>
-
-          {/* Right Side Controls */}
-          <div className="flex items-center space-x-2 xs:space-x-3 sm:space-x-4">
-            {/* Tools Dropdown - Hidden on Mobile */}
-            <div className="relative hidden lg:block" ref={toolsMenuRef}>
+            
+            {/* Tools Dropdown */}
+            <div className="relative" ref={toolsMenuRef}>
               <button
                 onClick={() => setIsToolsMenuOpen(!isToolsMenuOpen)}
                 onMouseEnter={() => setIsToolsMenuOpen(true)}
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-muted/50"
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
               >
                 {getTranslation(currentLocale, 'tools')}
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isToolsMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isToolsMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 w-56 bg-background border rounded-lg shadow-xl py-2 backdrop-blur-sm">
+                <div className="absolute left-0 top-full mt-1 w-56 bg-background border rounded-lg shadow-xl py-2 backdrop-blur-sm">
                   <Link
-                    href={generateI18nPath("/", currentLocale)}
+                    href={generateI18nPath("/veo3-prompt-generator", currentLocale)} 
                     className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
                     onClick={() => setIsToolsMenuOpen(false)}
                   >
@@ -145,16 +122,55 @@ export function Header() {
                     <FileText className="h-4 w-4 text-green-600" />
                     {getTranslation(currentLocale, 'videoToPrompt')}
                   </Link>
-                  <div
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-muted-foreground/50 cursor-not-allowed opacity-50"
-                    onClick={(e) => e.preventDefault()}
+                  {/* <Link
+                    href={generateI18nPath("/transcription", currentLocale)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
+                    onClick={() => setIsToolsMenuOpen(false)}
                   >
-                    <FileText className="h-4 w-4 text-orange-600/50" />
+                    <Award className="h-4 w-4 text-orange-600" />
                     {getTranslation(currentLocale, 'transcription')}
-                  </div>
+                  </Link> */}
+                  <Link
+                    href={generateI18nPath("/prompt-library", currentLocale)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-muted/50 transition-colors"
+                    onClick={() => setIsToolsMenuOpen(false)}
+                  >
+                    <Award className="h-4 w-4 text-orange-600" />
+                    {getTranslation(currentLocale, 'promptLibraryFooter')}
+                  </Link>
                 </div>
               )}
             </div>
+            
+            <Link
+              href={generateI18nPath("/about", currentLocale)}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
+            >
+              {getTranslation(currentLocale, 'about')}
+            </Link>
+            <Link
+              href={generateI18nPath("/disclaimer", currentLocale)}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
+            >
+              {getTranslation(currentLocale, 'disclaimer')}
+            </Link>
+            {/* <Link
+              href={generateI18nPath("/sitemap", currentLocale)}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
+            >
+              {getTranslation(currentLocale, 'sitemap')}
+            </Link> */}
+          </nav>
+
+          {/* Right Side Controls */}
+          <div className="flex items-center space-x-2 xs:space-x-3 sm:space-x-4">
+            {/* Contact Link - Hidden on Mobile */}
+            <Link
+              href={generateI18nPath("/contact", currentLocale)}
+              className="hidden lg:block text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
+            >
+              {getTranslation(currentLocale, 'contact')}
+            </Link>
 
             {/* Language Switcher - Hidden on Mobile */}
             <div className="relative hidden sm:block">
@@ -182,6 +198,37 @@ export function Header() {
               )}
             </div>
 
+            {/* User Menu - Only show when authenticated */}
+            {isAuthenticated && user && (
+              <div className="relative hidden sm:block" ref={userMenuRef}>
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors px-2 py-1 rounded-md hover:bg-muted/50"
+                >
+                  <User className="h-4 w-4" />
+                  <span className="hidden md:inline">{user.username}</span>
+                </button>
+
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-40 bg-background border rounded-md shadow-lg py-1">
+                    <div className="px-4 py-2 text-sm text-muted-foreground border-b">
+                      {user.role === 'admin' ? '管理员' : '用户'}
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen(false)
+                        logout()
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm hover:bg-muted flex items-center gap-2 text-red-600"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      登出
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
             <ThemeToggle />
 
             {/* Mobile Menu Button */}
@@ -207,13 +254,13 @@ export function Header() {
                 >
                   {getTranslation(currentLocale, 'home')}
                 </Link>
-                {/* <Link
-                  href={getSmartLink("/blog")}
+                <Link
+                  href={generateI18nPath("/blog", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getTranslation(currentLocale, 'blog')}
-                </Link> */}
+                </Link>
                 <Link
                   href={generateI18nPath("/prompt-guide", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
@@ -229,6 +276,13 @@ export function Header() {
                   {getTranslation(currentLocale, 'about')}
                 </Link>
                 <Link
+                  href={generateI18nPath("/disclaimer", currentLocale)}
+                  className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {getTranslation(currentLocale, 'disclaimer')}
+                </Link>
+                <Link
                   href={generateI18nPath("/contact", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
@@ -236,19 +290,12 @@ export function Header() {
                   {getTranslation(currentLocale, 'contact')}
                 </Link>
                 <Link
-                  href={generateI18nPath("/disclaimer", currentLocale)}
+                  href={generateI18nPath("/sitemap", currentLocale)}
                   className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {getTranslation(currentLocale, 'disclaimer')}
+                  {getTranslation(currentLocale, 'sitemap')}
                 </Link>
-                {/* <Link
-                  href={getSmartLink("/sitemap")}
-                  className="block text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sitemap
-                </Link> */}
               </div>
 
               {/* Tools Section */}
@@ -279,13 +326,14 @@ export function Header() {
                     <FileText className="h-4 w-4 xs:h-5 xs:w-5 text-green-600" />
                     {getTranslation(currentLocale, 'videoToPrompt')}
                   </Link>
-                  <div
-                    className="flex items-center gap-2 xs:gap-3 text-sm xs:text-base font-medium text-muted-foreground/50 cursor-not-allowed opacity-50 py-2 px-3 xs:px-4 rounded-md"
-                    onClick={(e) => e.preventDefault()}
+                  <Link
+                    href={generateI18nPath("/transcription", currentLocale)}
+                    className="flex items-center gap-2 xs:gap-3 text-sm xs:text-base font-medium text-muted-foreground hover:text-primary transition-colors py-2 px-3 xs:px-4 rounded-md hover:bg-muted/50"
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    <FileText className="h-4 w-4 xs:h-5 xs:w-5 text-orange-600/50" />
+                    <Award className="h-4 w-4 xs:h-5 xs:w-5 text-orange-600" />
                     {getTranslation(currentLocale, 'transcription')}
-                  </div>
+                  </Link>
                 </div>
               </div>
             </nav>

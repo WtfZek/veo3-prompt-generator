@@ -43,6 +43,7 @@ export default function VideoScriptGeneratorPage() {
       const response = await fetch("/api/generate-video-script", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include',
         body: JSON.stringify(formData),
       })
 

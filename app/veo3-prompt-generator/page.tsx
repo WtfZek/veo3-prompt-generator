@@ -112,6 +112,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({
             input: chatInput,
             dialogueSetting: outputOptions.dialogue
@@ -138,6 +139,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({
             input: chatInput,
             dialogueSetting: outputOptions.dialogue
@@ -229,6 +231,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({
             formData: advancedData,
             dialogueSetting: outputOptions.dialogue
@@ -255,6 +258,7 @@ export default function Veo3PromptGeneratorPage() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: 'include',
           body: JSON.stringify({
             formData: advancedData,
             dialogueSetting: outputOptions.dialogue
@@ -702,7 +706,7 @@ export default function Veo3PromptGeneratorPage() {
                 ) : (
                   <>
                     <Video className="mr-2 h-4 w-4" />
-                    Generate Prompt
+                    {getTranslation(currentLocale, 'generatePrompt')}
                   </>
                 )}
               </Button>
@@ -712,7 +716,7 @@ export default function Veo3PromptGeneratorPage() {
                 className="h-10 xs:h-12 px-4 xs:px-6 text-sm xs:text-base rounded-lg"
                 disabled={isGenerating}
               >
-                Clear
+                {getTranslation(currentLocale, 'clearForm')}
               </Button>
             </div>
 
@@ -947,4 +951,4 @@ export default function Veo3PromptGeneratorPage() {
       />
     </div>
   )
-} 
+}

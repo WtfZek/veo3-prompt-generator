@@ -10,10 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
+
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-
+  const currentLocale = useLocale()
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -51,15 +54,15 @@ export function ThemeToggle() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun className="mr-2 h-4 w-4" />
-          <span>Light</span>
+          <span>{getTranslation(currentLocale, "lightTheme")}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           <Moon className="mr-2 h-4 w-4" />
-          <span>Dark</span>
+          <span>{getTranslation(currentLocale, "darkTheme")}</span>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
           <Monitor className="mr-2 h-4 w-4" />
-          <span>System</span>
+          <span>{getTranslation(currentLocale, "followSystem")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

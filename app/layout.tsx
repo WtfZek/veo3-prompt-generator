@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from '@vercel/analytics/react'
+import { AuthProvider } from "@/contexts/auth-context"
 
 const poppins = Poppins({ 
   subsets: ["latin"],
@@ -61,10 +62,12 @@ export default function RootLayout({
     <html lang="zh" suppressHydrationWarning>
       <body className={poppins.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header />
-          {children}
-          <Footer />
-          <Toaster />
+          <AuthProvider>
+            <Header />
+            {children}
+            <Footer />
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

@@ -521,7 +521,12 @@ export function AIChatSection() {
                         size="sm"
                         className="absolute right-2 top-2 h-8 w-8 p-0"
                         disabled={apiError !== null}
-                        onClick={() => document.querySelector('input[type="file"]')?.click()}
+                        onClick={() => {
+                          const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+                          if (fileInput) {
+                            fileInput.click();
+                          }
+                        }}
                       >
                         <Paperclip className="h-4 w-4" />
                       </Button>

@@ -71,6 +71,7 @@ export default function VideoToPromptPage() {
 
       const response = await fetch("/api/analyze-video", {
         method: "POST",
+        credentials: 'include',
         body: formData,
       })
 

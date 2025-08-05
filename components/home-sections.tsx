@@ -30,7 +30,7 @@ import {
 } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Link from "next/link"
-import { useLocale } from "@/hooks/use-locale"
+import { useLocale, generateI18nPath } from "@/hooks/use-locale"
 import { getTranslation } from "@/lib/i18n"
 
 export function HomeSections() {
@@ -95,25 +95,25 @@ export function HomeSections() {
       icon: Video,
       title: getTranslation(currentLocale, 'veo3PromptGenerator'),
       description: getTranslation(currentLocale, 'veo3PromptGeneratorDesc'),
-      link: "/veo3-prompt-generator"
+      link: generateI18nPath("/veo3-prompt-generator", currentLocale)
     },
     {
       icon: FileText,
       title: getTranslation(currentLocale, 'videoScriptGenerator'),
       description: getTranslation(currentLocale, 'videoScriptGeneratorDesc'),
-      link: "/video-script-generator"
+      link: generateI18nPath("/video-script-generator", currentLocale)
     },
     {
       icon: Camera,
       title: getTranslation(currentLocale, 'videoToPrompt'),
       description: getTranslation(currentLocale, 'videoToPromptDesc'),
-      link: "/video-to-prompt"
+      link: generateI18nPath("/video-to-prompt", currentLocale)
     },
     {
       icon: Mic,
       title: getTranslation(currentLocale, 'transcription'),
       description: getTranslation(currentLocale, 'transcriptionDesc'),
-      link: "/transcription"
+      link: generateI18nPath("/transcription", currentLocale)
     }
   ]
 
@@ -425,4 +425,4 @@ export function HomeSections() {
       </section>
     </>
   )
-} 
+}

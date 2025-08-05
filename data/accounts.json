@@ -1,0 +1,25 @@
+{
+  "accounts": [
+    {
+      "id": "admin",
+      "username": "admin",
+      "password": "admin123",
+      "token": "2e6206add446f1d81326346471aa38f7bd5b1a5be352468d67a19bea8faf8451",
+      "role": "admin"
+    },
+    {
+      "id": "user1",
+      "username": "user1",
+      "password": "password123",
+      "token": null,
+      "role": "user"
+    },
+    {
+      "id": "demo",
+      "username": "demo",
+      "password": "demo123",
+      "token": null,
+      "role": "user"
+    }
+  ]
+}
