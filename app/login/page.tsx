@@ -10,8 +10,11 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Lock, User, Eye, EyeOff } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/contexts/auth-context"
+import { useLocale } from "@/hooks/use-locale"
+import { getTranslation } from "@/lib/i18n"
 
 export default function LoginPage() {
+  const currentLocale = useLocale()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
@@ -31,22 +34,22 @@ export default function LoginPage() {
       
       if (success) {
         toast({
-          title: "登录成功",
-          description: `欢迎回来，${username}！`,
+          title: getTranslation(currentLocale, 'loginSuccess'),
+          description: `${getTranslation(currentLocale, 'loginSuccessMessage')}，${username}！`,
         })
         router.push("/")
       } else {
-        setError("用户名或密码错误")
+        setError(getTranslation(currentLocale, 'loginError'))
       }
     } catch (error) {
-      setError("网络错误，请稍后重试")
+      setError(getTranslation(currentLocale, 'networkError'))
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex items-center justify-center p-4">
+    <div className="min-h-[calc(100vh-3.5rem)] xs:min-h-[calc(100vh-4rem)] bg-gradient-to-br from-background via-muted/30 to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo and Title */}
         <div className="text-center mb-8">
@@ -54,19 +57,19 @@ export default function LoginPage() {
             <Lock className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            VeO3 登录
+            {getTranslation(currentLocale, 'loginPageTitle')}
           </h1>
           <p className="text-muted-foreground mt-2">
-            请登录以访问 AI 提示词生成器
+            {getTranslation(currentLocale, 'loginPageSubtitle')}
           </p>
         </div>
 
         {/* Login Card */}
         <Card className="card-red-shadow border-red-medium/20">
           <CardHeader className="space-y-1 pb-6">
-            <CardTitle className="text-2xl text-center">登录账户</CardTitle>
+            <CardTitle className="text-2xl text-center">{getTranslation(currentLocale, 'loginAccountTitle')}</CardTitle>
             <CardDescription className="text-center">
-              输入您的用户名和密码以继续
+              {getTranslation(currentLocale, 'loginAccountDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -80,13 +83,13 @@ export default function LoginPage() {
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="username">用户名</Label>
+                <Label htmlFor="username">{getTranslation(currentLocale, 'username')}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="username"
                     type="text"
-                    placeholder="请输入用户名"
+                    placeholder={getTranslation(currentLocale, 'usernamePlaceholder')}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="pl-10 border-red-medium/20 focus:border-primary"
@@ -96,13 +99,13 @@ export default function LoginPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">密码</Label>
+                <Label htmlFor="password">{getTranslation(currentLocale, 'password')}</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="请输入密码"
+                    placeholder={getTranslation(currentLocale, 'passwordPlaceholder')}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="pl-10 pr-10 border-red-medium/20 focus:border-primary"
@@ -120,29 +123,21 @@ export default function LoginPage() {
               
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-white"
+                className="w-full bg-primary !mt-6 hover:bg-primary/90 text-white"
+
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    登录中...
+                    {getTranslation(currentLocale, 'loggingIn')}
                   </>
                 ) : (
-                  "登录"
+                  getTranslation(currentLocale, 'login')
                 )}
               </Button>
             </form>
             
-            {/* Demo Accounts Info */}
-            <div className="mt-6 p-4 bg-red-light/10 border border-red-medium/20 rounded-lg">
-              <h4 className="text-sm font-medium text-foreground mb-2">测试账号：</h4>
-              <div className="text-xs text-muted-foreground space-y-1">
-                <div>管理员: admin / admin123</div>
-                <div>用户1: user1 / password123</div>
-                <div>演示: demo / demo123</div>
-              </div>
-            </div>
           </CardContent>
         </Card>
         

@@ -770,10 +770,35 @@ export const translations = {
 
     // Common
     loading: "Loading...",
-    error: "An error occurred",
+    error: "Error occurred",
     success: "Success",
     required: "required",
     optional: "optional",
+
+    // Login Page
+    login: "Login",
+    loginAccount: "Login Account",
+    loginPageTitle: "Login",
+    loginPageSubtitle: "Please login to access the AI Prompt Generator",
+    loginAccountTitle: "Login Account",
+    loginAccountDescription: "Enter your username and password to continue",
+    username: "Username",
+    password: "Password",
+    usernamePlaceholder: "Please enter username",
+    passwordPlaceholder: "Please enter password",
+    loggingIn: "Logging in...",
+    loginSuccess: "Login successful",
+    loginSuccessMessage: "Welcome back",
+    loginError: "Username or password incorrect",
+    networkError: "Network error, please try again later",
+    loginRole: "Role",
+    admin: "Admin",
+    user: "User",
+    vip: "VIP",
+    svip: "SVIP",
+
+
+
     lightTheme: "Light",
     darkTheme: "Dark",
     followSystem: "System",
@@ -790,7 +815,7 @@ export const translations = {
     blog: "博客",
     about: "关于我们",
     contact: "联系我们",
-    getStarted: "开始使用",
+    getStarted: "立即体验",
     disclaimer: "免责声明",
     sitemap: "网站地图",
 
@@ -834,16 +859,16 @@ export const translations = {
     
     // Buttons and Actions
     generateScript: "生成脚本",
-    generatingScript: "正在生成脚本...",
-    clearForm: "清空",
-    copyScript: "复制脚本",
+    generatingScript: "AI生成中...",
+    clearForm: "重置表单",
+    copyScript: "复制到剪贴板",
     newScript: "新脚本",
     
     // Messages
     missingInformation: "信息缺失",
     missingInformationDesc: "请填写所有必填字段。",
     scriptGeneratedSuccessfully: "脚本生成成功！",
-    scriptGeneratedDesc: "您的视频脚本已准备就绪。",
+    scriptGeneratedDesc: "您的视频脚本已生成完成，可直接使用。",
     generationFailed: "生成失败",
     generationFailedDesc: "生成脚本失败。请重试。",
     
@@ -861,12 +886,12 @@ export const translations = {
     
     // About Section
     aboutVideoScriptGenerator: "关于视频脚本生成器",
-    aboutVideoScriptGeneratorDesc: "我们的视频脚本生成器是一个强大的AI驱动工具，旨在帮助内容创作者、电影制作人和视频制作人快速高效地创建引人注目的脚本。只需描述您的视频概念和主要角色，我们的先进AI就会生成包含场景描述、角色对话和叙事流程的专业质量脚本。这个工具非常适合YouTube创作者、社交媒体影响者、营销团队以及任何需要制作具有清晰结构化脚本的引人入胜视频内容的人。",
+    aboutVideoScriptGeneratorDesc: "本视频脚本生成器采用先进的人工智能技术，专为内容创作者、影视从业者及视频制作团队打造，可快速生成专业级视频脚本。,只需描述您的视频概念和主要角色，我们的先进AI就会生成包含场景描述、角色对话和叙事流程的专业质量脚本。这个工具非常适合YouTube创作者、社交媒体影响者、营销团队以及任何需要制作具有清晰结构化脚本的引人入胜视频内容的人。",
     
     // FAQ Section
     videoScriptFaqTitle: "常见问题",
     faqVideoTypesQuestion: "我可以为哪些类型的视频创建脚本？",
-    faqVideoTypesAnswer: "我们的视频脚本生成器可以为各种视频类型创建脚本，包括YouTube视频、TikTok内容、Instagram短视频、教育视频、宣传内容、叙事视频等。只需描述您的概念，AI就会相应地调整脚本。",
+    faqVideoTypesAnswer: "支持主流视频平台脚本制作，包括抖音短视频、B站中长视频、微信视频号内容、教育培训视频及商业宣传片等类型。,只需描述您的概念，AI就会相应地调整脚本。",
     faqScriptLengthQuestion: "生成的脚本有多长？",
     faqScriptLengthAnswer: "脚本长度根据您的输入和要求而变化。您可以指定是否需要30秒的短脚本或5-10分钟的长视频脚本。AI会相应地调整内容和详细程度。",
     faqEditScriptQuestion: "我可以编辑生成的脚本吗？",
@@ -876,7 +901,7 @@ export const translations = {
 
     // Video to Prompt Generator - Extended
     videoToPromptGeneratorTitle: "视频转提示词生成器",
-    videoToPromptGeneratorSubtitle: "将您现有的视频转换为详细的AI提示词。上传视频并获得用于AI视频生成平台的全面提示词。",
+    videoToPromptGeneratorSubtitle: "将现有视频智能解析为结构化提示词，适配各类AI视频生成平台。支持一键导出完整提示词方案。",
     videoToPromptFreeOnline: "在线免费",
     
     // Upload Section
@@ -925,7 +950,7 @@ export const translations = {
     faqAIPlatformCompatibilityQuestion: "我可以在任何AI视频平台上使用这些提示词吗？",
     faqAIPlatformCompatibilityAnswer: "是的！生成的提示词设计为与大多数AI视频生成平台兼容，包括Runway、Pika Labs、Veo3等。您可以根据特定平台的需要修改提示词。",
     faqVideoSecurityQuestion: "我的视频内容安全吗？",
-    faqVideoSecurityAnswer: "绝对安全。我们优先考虑您的隐私和安全。视频经过安全处理，不会永久存储。我们只分析内容以生成提示词，不保留您的视频文件。",
+    faqVideoSecurityAnswer: "严格遵守信息安全标准，采用传输加密和临时存储机制。视频文件在完成解析后72小时内自动永久删除。",
 
     // Veo3 Prompt Generator - Structured Mode
     structuredMode: "结构化模式",
@@ -1448,13 +1473,37 @@ export const translations = {
     success: "成功",
     required: "必填",
     optional: "可选",
+
+    // Login Page
+    login: "登录",
+    loginAccount: "登录账户",
+    loginPageTitle: "登录",
+    loginPageSubtitle: "请登录以访问 AI 提示词生成器",
+    loginAccountTitle: "登录账户",
+    loginAccountDescription: "输入您的用户名和密码以继续",
+    username: "用户名",
+    password: "密码",
+    usernamePlaceholder: "请输入用户名",
+    passwordPlaceholder: "请输入密码",
+    loggingIn: "登录中...",
+    loginSuccess: "登录成功",
+    loginSuccessMessage: "欢迎回来",
+    loginError: "用户名或密码错误",
+    networkError: "网络错误，请稍后重试",
+    loginRole: "身份",
+    admin: "管理员",
+    user: "用户",
+    vip: "VIP",
+    svip: "SVIP",
+
+
     lightTheme: "浅色主题",
     darkTheme: "深色主题",
     followSystem: "跟随系统",
 
     // Privacy Policy Page
     privacyPolicyTitle: "隐私政策",
-    privacyPolicyLastUpdated: "最后更新：2025 年 8 月",
+    privacyPolicyLastUpdated: "最后更新：2024年12月",
     privacyIntroductionTitle: "引言",
     privacyIntroductionDesc: "在VeO3提示词生成器，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策解释了我们如何收集、使用和保护您在使用我们的AI驱动视频提示词生成服务时的信息。",
     privacyPolicyIntro: "在VeO3提示词生成器，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策解释了我们如何收集、使用和保护您在使用我们的AI驱动视频提示词生成服务时的信息。",
@@ -1492,9 +1541,6 @@ export const translations = {
     privacyInfoUseItem3: "分析使用模式以增强用户体验",
     privacyInfoUseItem4: "与您就服务更新和支持进行沟通",
     privacyInfoUseItem5: "确保我们平台的安全性和完整性",
-    privacyInfoUseItem6: "分析使用模式和性能",
-    privacyInfoUseItem7: "检测和预防欺诈、滥用或安全问题",
-    privacyInfoUseItem8: "遵守法律义务和保护我们的依法权利",
     
     privacyDataSecurityTitle: "数据安全",
     privacyDataSecurityDesc: "我们实施行业标准的安全措施来保护您的信息：",
@@ -1538,6 +1584,7 @@ export const translations = {
     privacyContactEmail: "电子邮件：privacy@veo3promptgenerator.com",
     privacyContactAddress: "地址：[您的公司地址]",
     privacyContactResponse: "我们将在收到您的询问后30天内回复。",
+
   },
 
 
